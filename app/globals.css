@@ -1,0 +1,34 @@
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF;color:#1C1A17;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+::selection{background:#1C1A17;color:#FAFAF9}
+:focus-visible{outline:1.5px dashed #1C1A17;outline-offset:4px}
+
+/* Hover / active states (style-hover in the design source) */
+.h-pill:hover{background:rgba(28,26,23,.06) !important}
+.h-roll{display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.22,1,.36,1)}
+.h-pill:hover .h-roll{transform:translateY(-18px)}
+.h-talk:hover{background:#1C1A17 !important}
+.h-ink:hover{color:#1C1A17 !important}
+.h-face:hover{background:rgba(250,250,249,.95) !important}
+.h-tile:hover{background:#1C1A17 !important;color:#FAFAF9;transform:translateZ(14px)}
+.h-soft:hover{background:#F4F4F2 !important}
+.h-proj:hover{background:#F4F4F2 !important;border-color:#5C5952 !important}
+.h-lift:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(28,26,23,.18)}
+.h-cell:hover{transform:scale(1.35)}
+.h-press:active{transform:scale(.92)}
+
+.img-fill{position:absolute;inset:0;width:100%;height:100%;display:block}
+.credit{position:absolute;left:6px;bottom:6px;max-width:calc(100% - 12px);padding:3px 7px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;font:10px/1.2 system-ui,-apple-system,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;backdrop-filter:blur(6px)}
+.credit a{color:inherit}
+.credit a:hover,.credit a:focus-visible{text-decoration:underline}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.shot:has(img[data-fallback]) .credit,.shot:has(.img-fill:not(img)) .credit{display:none}
+
+/* Project cards: the "view case" button stretches over the whole card; links stay clickable above it */
+.proj-pick::after{content:'';position:absolute;inset:0}
+.proj-pick:focus-visible{outline:none}
+.proj-pick:focus-visible::after{outline:1.5px dashed #1C1A17;outline-offset:3px}
+.h-proj .shot,.h-proj .proj-link{position:relative;z-index:1}

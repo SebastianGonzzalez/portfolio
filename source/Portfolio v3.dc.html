@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Geist:wght@100..900&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF;color:#1C1A17;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+::selection{background:#1C1A17;color:#FAFAF9}
+:focus-visible{outline:1.5px dashed #1C1A17;outline-offset:4px}
+</style>
+</helmet>
+<div ref="{{ root }}" style="background:#FFFFFF;color:#1C1A17;font-family:'Geist',sans-serif;overflow-x:clip">
+
+  <div ref="{{ pre }}" aria-hidden="true" style="position:fixed;inset:0;z-index:100;background:#FFFFFF;display:flex;align-items:center;justify-content:center">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:18px;width:min(320px,80vw)">
+      <span style="font-family:'EB Garamond',serif;font-size:40px;letter-spacing:-.02em">Sebastián González</span>
+      <span style="display:flex;justify-content:space-between;width:100%;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span>{{ t.loading }}</span><span ref="{{ preNum }}">000</span></span>
+      <span style="position:relative;width:100%;height:1px;border-top:1px dashed #A6A39B"><span ref="{{ preBar }}" style="position:absolute;left:0;top:-1px;height:1px;width:100%;background:#1C1A17;transform:scaleX(0);transform-origin:left"></span></span>
+    </div>
+  </div>
+
+  <header style="position:fixed;top:18px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:0 clamp(12px,2vw,24px);pointer-events:none">
+    <div style="flex:1;display:flex">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Principal" style="pointer-events:auto;display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(28,26,23,.08);box-shadow:0 1px 2px rgba(28,26,23,.06),0 8px 24px rgba(28,26,23,.06)">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+            <a href="{{ n.href }}" style="height:38px;padding:0 16px;display:flex;align-items:center;border-radius:999px;font-size:15px;color:#3E3B36;transition:background 200ms ease-out" style-hover="background:rgba(28,26,23,.06)"><span style="width:5px;height:5px;border-radius:50%;background:#1C1A17;margin-right:{{ n.mr }};opacity:{{ n.dot }};transform:scale({{ n.dot }});transition:opacity 300ms ease-out,transform 300ms cubic-bezier(.22,1,.36,1),margin 300ms cubic-bezier(.22,1,.36,1)"></span><span style="display:block;height:18px;overflow:hidden;line-height:18px"><span style="display:flex;flex-direction:column;transition:transform 420ms cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-18px)"><span>{{ n.label }}</span><span aria-hidden="true">{{ n.label }}</span></span></span></a>
+          </sc-for>
+        </nav>
+      </sc-if>
+    </div>
+    <a href="#top" aria-label="Inicio" style="pointer-events:auto;position:relative;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(28,26,23,.08);box-shadow:0 1px 2px rgba(28,26,23,.06),0 8px 24px rgba(28,26,23,.06);font-family:'EB Garamond',serif;font-style:italic;font-size:22px;letter-spacing:-.02em">SG<span ref="{{ progRing }}" aria-hidden="true" style="position:absolute;inset:-1px;border-radius:50%;pointer-events:none;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px))"></span></a>
+    <div style="flex:1;display:flex;justify-content:flex-end">
+      <div style="pointer-events:auto;display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(28,26,23,.08);box-shadow:0 1px 2px rgba(28,26,23,.06),0 8px 24px rgba(28,26,23,.06)">
+        <button onClick="{{ toggleLang }}" aria-label="{{ t.langAria }}" style="height:38px;padding:0 14px;border:0;background:transparent;cursor:pointer;border-radius:999px;font-family:'Geist Mono',monospace;font-size:12px;color:#1C1A17;display:flex;gap:6px;align-items:center" style-hover="background:rgba(28,26,23,.06)"><span style="opacity:{{ esO }}">ES</span><span style="opacity:.3">/</span><span style="opacity:{{ enO }}">EN</span></button>
+        <a href="#contacto" style="height:38px;padding:0 18px;display:flex;align-items:center;border-radius:999px;background:#3A3733;color:#FAFAF9;font-size:15px;font-weight:500;transition:background 200ms ease-out" style-hover="background:#1C1A17">{{ t.talk }}</a>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width:1240px;margin:0 auto;border-left:1px dashed #B4B1A9;border-right:1px dashed #B4B1A9">
+
+    <section id="top" data-stack="" data-screen-label="Hero" style="position:relative;background:#FFFFFF;padding:clamp(120px,16vh,168px) clamp(20px,4vw,56px) clamp(64px,8vw,104px);display:flex;flex-wrap:wrap;gap:clamp(32px,4vw,56px);align-items:center">
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div style="flex:1 1 440px;max-width:600px;display:flex;flex-direction:column;gap:28px">
+        <div data-intro="" style="display:flex;align-items:center;gap:16px">
+          <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;filter:grayscale(1);border:1px solid rgba(28,26,23,.12)"><image-slot id="v3-avatar" shape="circle" src="https://avatars.githubusercontent.com/u/281209723?v=4" placeholder="Foto"></image-slot></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="display:flex;align-items:center;gap:8px;font-size:19px;font-weight:600;letter-spacing:-.01em">Sebastián González<span aria-label="Verificado" style="width:16px;height:16px;border-radius:50%;background:#1C1A17;color:#FAFAF9;display:inline-flex;align-items:center;justify-content:center;font-size:10px">✓</span></span>
+            <span style="display:flex;gap:14px;font-family:'Geist Mono',monospace;font-size:12px;color:#5C5952"><a href="https://github.com/SebastianGonzzalez" target="_blank" rel="noopener" style-hover="color:#1C1A17">GitHub ↗</a><a href="https://wa.me/573053090124" target="_blank" rel="noopener" style-hover="color:#1C1A17">WhatsApp ↗</a><a href="https://www.instagram.com/ss.ebas_/" target="_blank" rel="noopener" style-hover="color:#1C1A17">Instagram ↗</a><a href="{{ mailto }}" style-hover="color:#1C1A17">Email ↗</a></span>
+          </div>
+        </div>
+        <div data-intro="" style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.kicker }}</div>
+        <h1 data-intro="" style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(50px,6.2vw,92px);line-height:.96;letter-spacing:-.025em;text-wrap:balance">{{ t.h1a }}<em style="font-weight:400">{{ t.h1b }}</em></h1>
+        <p data-intro="" style="margin:0;font-size:18px;line-height:1.7;color:#4A4741;max-width:540px">{{ t.hb1 }}<span style="display:inline-flex;align-items:center;gap:6px;padding:0 8px;margin:0 2px;border:1px dashed #9C998F;border-radius:6px;background:#F2F2F0;font-family:'Geist Mono',monospace;font-size:13px;color:#1C1A17;line-height:24px"><span style="font-weight:500">TS</span>TypeScript</span>, <span style="display:inline-flex;align-items:center;gap:6px;padding:0 8px;margin:0 2px;border:1px dashed #9C998F;border-radius:6px;background:#F2F2F0;font-family:'Geist Mono',monospace;font-size:13px;color:#1C1A17;line-height:24px"><span style="font-weight:500">⚛</span>React</span>{{ t.and }}<span style="display:inline-flex;align-items:center;gap:6px;padding:0 8px;margin:0 2px;border:1px dashed #9C998F;border-radius:6px;background:#F2F2F0;font-family:'Geist Mono',monospace;font-size:13px;color:#1C1A17;line-height:24px"><span style="font-weight:500">N</span>Next.js</span>{{ t.hb2 }}</p>
+      </div>
+
+      <div ref="{{ isoStage }}" onPointerMove="{{ isoMove }}" onPointerLeave="{{ isoLeave }}" style="flex:1.15 1 480px;position:relative;height:clamp(460px,48vw,620px);perspective:1800px;min-width:0">
+        <div style="position:absolute;left:0;top:0;display:flex;gap:10px;align-items:center;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span>{{ t.isoK }}</span><span style="width:24px;border-top:1px dashed #8E8B83"></span><span style="letter-spacing:.04em;text-transform:none">{{ t.isoHint }}</span></div>
+        <div ref="{{ isoGroup }}" style="position:absolute;left:50%;top:52%;width:520px;height:516px;transform-style:preserve-3d;transform:translate(-50%,-50%) rotateX(14deg) rotateY(-26deg) rotateZ(-7deg);transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+
+          <div data-z="0" style="position:absolute;left:0;top:404px;width:520px;height:112px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <div style="position:absolute;inset:0;border:1px dashed #B9B6AE;transform:translateZ(-28px)"></div>
+            <div style="position:absolute;inset:0;border:1px dashed #8E8B83;background:rgba(244,244,242,.72);padding:22px 26px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;transition:background 240ms ease-out" style-hover="background:rgba(250,250,249,.95)">
+              <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;left:-1px;bottom:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+              <span style="font-family:'EB Garamond',serif;font-size:28px;line-height:1">{{ l3.t }}</span><span style="font-size:13px;color:#5C5952">{{ l3.d }}</span>
+            </div>
+          </div>
+
+          <div data-z="1" style="position:absolute;left:0;top:326px;width:520px;height:64px;transform-style:preserve-3d;display:flex;gap:6px;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <sc-for list="{{ tiles }}" as="tl" hint-placeholder-count="9">
+              <div style="position:relative;flex:1;border:1px dashed #8E8B83;background:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:11px;color:#1C1A17;transition:background 200ms ease-out,transform 300ms cubic-bezier(.22,1,.36,1)" style-hover="background:#1C1A17;color:#FAFAF9;transform:translateZ(14px)">
+                <span style="position:absolute;left:-1px;top:-1px;width:6px;height:6px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:6px;height:6px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>{{ tl }}
+              </div>
+            </sc-for>
+          </div>
+
+          <div data-z="2" style="position:absolute;left:0;top:216px;width:360px;height:96px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <div style="position:absolute;inset:0;border:1px dashed #B9B6AE;transform:translateZ(-28px)"></div>
+            <div style="position:absolute;inset:0;border:1px dashed #8E8B83;background:rgba(244,244,242,.72);padding:18px 24px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;transition:background 240ms ease-out" style-hover="background:rgba(250,250,249,.95)">
+              <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+              <span style="font-family:'EB Garamond',serif;font-size:26px;line-height:1">{{ l2.t }}</span><span style="font-size:12.5px;color:#5C5952">{{ l2.d }}</span>
+            </div>
+          </div>
+
+          <div data-z="3" style="position:absolute;left:0;top:108px;width:360px;height:96px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <div style="position:absolute;inset:0;border:1px dashed #B9B6AE;transform:translateZ(-28px)"></div>
+            <div style="position:absolute;inset:0;border:1px dashed #8E8B83;background:rgba(244,244,242,.72);padding:18px 24px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;transition:background 240ms ease-out" style-hover="background:rgba(250,250,249,.95)">
+              <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+              <span style="font-family:'EB Garamond',serif;font-size:26px;line-height:1">{{ l1.t }}</span><span style="font-size:12.5px;color:#5C5952">{{ l1.d }}</span>
+            </div>
+          </div>
+
+          <div data-z="4" style="position:absolute;left:0;top:0;width:360px;height:96px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <div style="position:absolute;inset:0;border:1px dashed #B9B6AE;transform:translateZ(-28px)"></div>
+            <div style="position:absolute;inset:0;border:1px dashed #8E8B83;background:rgba(244,244,242,.72);padding:18px 24px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;transition:background 240ms ease-out" style-hover="background:rgba(250,250,249,.95)">
+              <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+              <span style="font-family:'EB Garamond',serif;font-size:26px;line-height:1">{{ l0.t }}</span><span style="font-size:12.5px;color:#5C5952">{{ l0.d }}</span>
+            </div>
+          </div>
+
+          <div data-z="3" style="position:absolute;left:372px;top:0;width:148px;height:312px;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.22,1,.36,1)">
+            <div style="position:absolute;inset:0;border:1px dashed #B9B6AE;transform:translateZ(-28px)"></div>
+            <div style="position:absolute;inset:0;border:1px dashed #8E8B83;background:rgba(244,244,242,.72);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+              <span style="position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;left:-1px;bottom:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+              <span style="font-family:'EB Garamond',serif;font-style:italic;font-size:64px;line-height:1;letter-spacing:-.04em">SG.</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#5C5952">v0.4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enfoque" data-stack="" data-screen-label="Enfoque" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) clamp(72px,10vw,128px);display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,40px);align-items:flex-start">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">02</span><span>/ 07</span><span>{{ t.s1 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div style="flex:1 1 440px;display:flex;flex-direction:column;gap:clamp(24px,3vw,40px)">
+        <div data-reveal="" style="position:relative;border:1px dashed #A6A39B;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:20px">
+          <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;left:-1px;bottom:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.enK }}</span>
+          <h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(38px,4vw,56px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance">{{ t.enT }}</h2>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#4A4741;max-width:500px">{{ t.enD }}</p>
+        </div>
+        <div data-reveal="" style="background:#1C1A17;color:#FAFAF9;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A29F97">{{ t.dfK }}</span>
+          <h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(38px,4vw,56px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance">{{ t.dfT }}</h2>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#B9B6AE;max-width:500px">{{ t.dfD }}</p>
+        </div>
+      </div>
+      <div data-reveal="" style="flex:1 1 440px;display:flex;flex-direction:column;gap:18px">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.prK }}</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border-top:1px dashed #A6A39B;border-left:1px dashed #A6A39B">
+          <sc-for list="{{ principles }}" as="c" hint-placeholder-count="4">
+            <div style="position:relative;padding:28px 26px 32px;border-right:1px dashed #A6A39B;border-bottom:1px dashed #A6A39B;display:flex;flex-direction:column;gap:14px;min-height:220px;transition:background 240ms ease-out" style-hover="background:#F4F4F2">
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#5C5952">{{ c.n }}</span>
+              <span style="font-family:'EB Garamond',serif;font-size:34px;line-height:1;letter-spacing:-.015em;margin-top:auto">{{ c.t }}</span>
+              <span style="font-size:15px;line-height:1.5;color:#4A4741">{{ c.d }}</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#6E6B64">→ {{ c.a }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section id="trabajo" data-stack="" data-screen-label="Trabajo" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) clamp(72px,10vw,128px)">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">03</span><span>/ 07</span><span>{{ t.s2 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(36px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:16px"><span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.wkK }}</span><h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(48px,6vw,84px);line-height:.95;letter-spacing:-.025em">{{ t.wkT }}</h2></div>
+        <a href="#archivo" style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px dashed #1C1A17;padding-bottom:4px">{{ t.wkAll }} ↓</a>
+      </div>
+      <div ref="{{ projGrid }}" style="display:flex;flex-wrap:wrap;gap:20px">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+          <div data-reveal="" onClick="{{ p.pick }}" title="{{ p.tip }}" style="position:relative;flex:{{ p.flex }};min-width:0;border:1px dashed #A6A39B;padding:14px;display:flex;flex-wrap:wrap;gap:22px;background:transparent;cursor:{{ p.cursor }};transition:background 260ms ease-out,border-color 260ms ease-out" style-hover="background:#F4F4F2;border-color:#5C5952">
+            <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;left:-1px;bottom:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+            <a href="{{ p.site }}" target="_blank" rel="noopener" aria-label="{{ p.name }} · demo" style="flex:{{ p.imgFlex }};min-width:0;align-self:flex-start;border:1px solid rgba(28,26,23,.12);background:#1C1A17;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform 300ms cubic-bezier(.22,1,.36,1),box-shadow 300ms ease-out" style-hover="transform:translateY(-3px);box-shadow:0 14px 32px rgba(28,26,23,.18)">
+              <div style="position:relative;aspect-ratio:1282/770;background:#1C1A17"><image-slot id="{{ p.slot }}" shape="rect" fit="contain" src="{{ p.img }}" credit="{{ p.credit }}" credit-href="{{ p.creditHref }}" placeholder="{{ p.ph }}"></image-slot></div>
+            </a>
+            <div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px;padding:10px 10px 12px">
+              <div style="display:flex;justify-content:space-between;gap:12px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952"><span>{{ p.n }} · {{ p.kind }}</span><span>{{ p.lang }}</span></div>
+              <div style="margin-top:{{ p.titleMt }};display:flex;flex-direction:column;gap:{{ p.titleGap }}"><span style="font-family:'EB Garamond',serif;font-size:{{ p.nameSize }};line-height:.92;letter-spacing:-.03em;text-wrap:balance">{{ p.name }}</span><span style="font-size:{{ p.descSize }};line-height:1.5;color:#4A4741;max-width:440px;text-wrap:pretty">{{ p.desc }}</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:auto">
+                <sc-for list="{{ p.chips }}" as="ch" hint-placeholder-count="2"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border:1px solid #B4B1A9;border-radius:4px;background:#F4F4F2">{{ ch }}</span></sc-for>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px"><a href="{{ p.repo }}" target="_blank" rel="noopener" style="font-size:14px;font-weight:500;display:flex;gap:6px;border-bottom:1px dashed #1C1A17;padding-bottom:3px">{{ t.repo }} ↗</a><sc-if value="{{ p.small }}" hint-placeholder-val="{{ true }}"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C5952">{{ t.cHint }} ↑</span></sc-if></div>
+            </div>
+            <sc-if value="{{ p.feat }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1 1 100%;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px 32px;margin:0 10px 6px;padding-top:22px;border-top:1px dashed #A6A39B">
+                <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.cProb }}</span><span style="font-size:14.5px;line-height:1.55;color:#3E3B36;text-wrap:pretty">{{ p.problem }}</span></div>
+                <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.cRole }}</span><span style="font-size:14.5px;line-height:1.55;color:#3E3B36;text-wrap:pretty">{{ p.role }}</span></div>
+                <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.cBuilt }}</span>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 28px">
+                    <sc-for list="{{ p.built }}" as="b" hint-placeholder-count="4"><div style="display:flex;gap:10px;font-size:14.5px;line-height:1.55;color:#3E3B36;text-wrap:pretty"><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#8E8B83;padding-top:2px">→</span><span>{{ b }}</span></div></sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.cDec }}</span><span style="font-size:14.5px;line-height:1.55;color:#3E3B36;text-wrap:pretty">{{ p.decisions }}</span></div>
+                <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.cRes }}</span><span style="font-size:14.5px;line-height:1.55;color:#3E3B36;text-wrap:pretty">{{ p.result }}</span></div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="github" data-stack="" data-screen-label="GitHub" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) clamp(72px,10vw,128px);overflow:hidden">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">04</span><span>/ 07</span><span>{{ t.s3 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div aria-hidden="true" style="position:absolute;right:-2%;top:clamp(40px,6vw,80px);font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(120px,19vw,280px);line-height:.8;letter-spacing:-.04em;color:#D0CEC6;pointer-events:none;white-space:nowrap">git log</div>
+      <div data-reveal="" style="position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(36px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:16px"><span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.ghK }}</span><h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(44px,5.4vw,76px);line-height:.98;letter-spacing:-.025em;max-width:620px;text-wrap:balance">{{ t.ghT }}</h2></div>
+        <a href="https://github.com/SebastianGonzzalez" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border:1px dashed #8E8B83;border-radius:999px;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:12px;transition:background 200ms ease-out" style-hover="background:#F4F4F2"><span style="width:7px;height:7px;border-radius:50%;background:{{ ghDot }}"></span>@SebastianGonzzalez · {{ ghStatus }} ↗</a>
+      </div>
+      <div data-reveal="" style="position:relative;border:1px dashed #A6A39B;background:rgba(255,255,255,.82)">
+        <span style="position:absolute;left:-1px;top:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17"></span><span style="position:absolute;left:-1px;bottom:-1px;width:8px;height:8px;border-left:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span><span style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-bottom:1.5px solid #1C1A17"></span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:1px dashed #A6A39B">
+          <div style="padding:24px 26px;border-right:1px dashed #A6A39B;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">{{ t.stTotal }}</span><span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1;letter-spacing:-.02em">{{ gh.total }}</span></div>
+          <div style="padding:24px 26px;border-right:1px dashed #A6A39B;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">{{ t.stStreak }}</span><span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1;letter-spacing:-.02em">{{ gh.streak }}<span style="font-size:20px;color:#5C5952"> {{ t.stDays }}</span></span></div>
+          <div style="padding:24px 26px;border-right:1px dashed #A6A39B;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">{{ t.stActive }}</span><span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1;letter-spacing:-.02em">{{ gh.active }}<span style="font-size:20px;color:#5C5952"> {{ t.stDays }}</span></span></div>
+          <div style="padding:24px 26px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">{{ t.stRepos }}</span><span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1;letter-spacing:-.02em">{{ gh.repos }}</span></div>
+        </div>
+        <div style="padding:26px clamp(12px,2vw,26px);overflow-x:auto;overflow-y:hidden">
+          <div ref="{{ ghWrap }}" style="position:relative;width:max-content;display:flex;flex-direction:column;gap:8px">
+            <div style="display:grid;grid-template-columns:repeat(53,11px);gap:3px;font-family:'Geist Mono',monospace;font-size:10px;color:#5C5952;height:14px">
+              <sc-for list="{{ gh.months }}" as="m" hint-placeholder-count="12"><span style="grid-column:{{ m.col }};grid-row:1;white-space:nowrap">{{ m.l }}</span></sc-for>
+            </div>
+            <div onMouseOver="{{ ghOver }}" onMouseLeave="{{ ghOut }}" style="display:grid;grid-template-rows:repeat(7,11px);grid-auto-flow:column;grid-auto-columns:11px;gap:3px">
+              <sc-for list="{{ gh.cells }}" as="c" hint-placeholder-count="120"><span data-tip="{{ c.tip }}" style="width:11px;height:11px;border-radius:2px;background:{{ c.bg }};border:{{ c.bd }};box-sizing:border-box;transition:transform 120ms ease-out" style-hover="transform:scale(1.35)"></span></sc-for>
+            </div>
+            <div ref="{{ ghTip }}" style="position:absolute;left:0;top:0;pointer-events:none;opacity:0;transition:opacity 120ms ease-out;background:#1C1A17;color:#FAFAF9;font-family:'Geist Mono',monospace;font-size:11px;padding:6px 10px;border-radius:6px;white-space:nowrap"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:0 26px 22px;font-family:'Geist Mono',monospace;font-size:11px;color:#5C5952">
+          <span>{{ t.ghNote }}</span>
+          <span style="display:flex;align-items:center;gap:4px">{{ t.less }}<span style="width:11px;height:11px;border-radius:2px;background:#CAC8C0;margin-left:4px"></span><span style="width:11px;height:11px;border-radius:2px;background:#A6A39B"></span><span style="width:11px;height:11px;border-radius:2px;background:#7A776F"></span><span style="width:11px;height:11px;border-radius:2px;background:#4A4741"></span><span style="width:11px;height:11px;border-radius:2px;background:#1C1A17;margin-right:4px"></span>{{ t.more2 }}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;border-top:1px dashed #A6A39B">
+          <div style="flex:1 1 300px;padding:26px;border-right:1px dashed #A6A39B;display:flex;flex-direction:column;gap:18px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">{{ t.langs }}</span>
+            <div style="display:flex;height:10px;gap:3px">
+              <sc-for list="{{ langs }}" as="lg" hint-placeholder-count="3"><span style="flex:{{ lg.p }};background:{{ lg.c }};border-radius:2px"></span></sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ langs }}" as="lg" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;align-items:center;font-size:14px"><span style="display:flex;align-items:center;gap:10px"><span style="width:9px;height:9px;border-radius:2px;background:{{ lg.c }}"></span>{{ lg.n }}</span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:#5C5952">{{ lg.p }}%</span></div></sc-for>
+            </div>
+          </div>
+          <div style="flex:2 1 460px;padding:26px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952">Commits · $ git log --oneline</span>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ log }}" as="e" hint-placeholder-count="5">
+                <a href="{{ e.url }}" target="_blank" rel="noopener" style="display:grid;grid-template-columns:18px 72px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-top:1px dashed #B4B1A9;font-size:14px;transition:background 200ms ease-out" style-hover="background:#F4F4F2">
+                  <span style="position:relative;height:100%;display:flex;justify-content:center"><span style="width:9px;height:9px;border-radius:50%;margin-top:4px;background:{{ e.dot }};border:1.5px solid #1C1A17;box-sizing:border-box"></span></span>
+                  <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#5C5952">{{ e.h }}</span>
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ e.m }}</span>
+                  <span style="font-family:'Geist Mono',monospace;font-size:10.5px;padding:3px 7px;border-radius:4px;background:{{ e.tagBg }};color:{{ e.tagFg }};white-space:nowrap">{{ e.tag }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab" data-stack="" data-screen-label="Laboratorio" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) clamp(72px,10vw,128px)">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">05</span><span>/ 07</span><span>{{ t.s4 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;margin-bottom:clamp(36px,4vw,56px)"><span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.labK }}</span><h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(44px,5.4vw,76px);line-height:.98;letter-spacing:-.025em;max-width:680px;text-wrap:balance">{{ t.labT }}</h2></div>
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;border-top:1px dashed #A6A39B;border-left:1px dashed #A6A39B">
+        <div style="flex:2 1 520px;min-height:440px;border-right:1px dashed #A6A39B;border-bottom:1px dashed #A6A39B;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;padding:16px 20px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952"><span>EXP-01 · {{ t.e1 }}</span><span>01</span></div>
+          <div style="flex:1;position:relative;margin:0 16px;min-height:320px;background-image:radial-gradient(#ADAAA2 1px,transparent 1px);background-size:18px 18px;touch-action:none;user-select:none;overflow:hidden">
+            <div onPointerDown="{{ startDrag }}" style="position:absolute;left:7%;top:12%;cursor:grab;background:#1C1A17;color:#FAFAF9;padding:15px 24px;border-radius:999px;font-size:15px;font-weight:500">{{ t.pSend }} →</div>
+            <div onPointerDown="{{ startDrag }}" onClick="{{ toggleMotion }}" style="position:absolute;left:55%;top:9%;cursor:grab;background:#FAFAF9;border:1px dashed #8E8B83;padding:12px 14px;display:flex;gap:14px;align-items:center">
+              <span style="font-size:14px;font-weight:500">{{ t.pMotion }}</span>
+              <span style="width:46px;height:26px;border-radius:999px;background:{{ tgBg }};position:relative;transition:background 220ms cubic-bezier(.22,1,.36,1)"><span style="position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#FAFAF9;transform:{{ tgKnob }};transition:transform 220ms cubic-bezier(.22,1,.36,1)"></span></span>
+            </div>
+            <div onPointerDown="{{ startDrag }}" style="position:absolute;left:10%;top:44%;cursor:grab;width:220px;background:#FAFAF9;border:1px dashed #8E8B83;padding:12px;display:flex;flex-direction:column;gap:10px">
+              <div style="height:84px;background:repeating-linear-gradient(135deg,#E6E6E4 0 1px,transparent 1px 8px);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:11px;color:#5C5952">casa-nua.png</div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'EB Garamond',serif;font-size:20px">Casa Nua</span><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#5C5952">JS</span></div>
+            </div>
+            <div onPointerDown="{{ startDrag }}" style="position:absolute;left:50%;top:42%;cursor:grab;background:#FFFFFF;border:1px solid #1C1A17;padding:7px 12px;border-radius:999px;font-family:'Geist Mono',monospace;font-size:11px">v0.4 · HEAD</div>
+            <div onPointerDown="{{ startDrag }}" style="position:absolute;left:60%;top:58%;cursor:grab;width:176px;background:#1C1A17;color:#FAFAF9;padding:16px;font-family:'EB Garamond',serif;font-style:italic;font-size:22px;line-height:1.1">{{ t.pNote }}</div>
+          </div>
+          <div style="padding:16px 20px;font-size:14px;color:#4A4741">{{ t.e1d }}</div>
+        </div>
+        <div style="flex:1 1 300px;min-height:440px;border-right:1px dashed #A6A39B;border-bottom:1px dashed #A6A39B;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;padding:16px 20px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952"><span>EXP-02 · {{ t.e2 }}</span><span>02</span></div>
+          <div ref="{{ weightBox }}" onPointerEnter="{{ enterW }}" onPointerMove="{{ moveW }}" onPointerLeave="{{ leaveW }}" style="flex:1;display:flex;align-items:center;justify-content:center;cursor:crosshair;user-select:none;font-size:clamp(84px,8vw,130px);letter-spacing:-.05em;font-weight:200;line-height:1">
+            <span data-l="" style="transition:font-weight 200ms ease-out">H</span><span data-l="" style="transition:font-weight 200ms ease-out">o</span><span data-l="" style="transition:font-weight 200ms ease-out">l</span><span data-l="" style="transition:font-weight 200ms ease-out">a</span><span data-l="" style="transition:font-weight 200ms ease-out;font-family:'EB Garamond',serif;font-style:italic">.</span>
+          </div>
+          <div style="padding:16px 20px;font-size:14px;color:#4A4741">{{ t.e2d }}</div>
+        </div>
+        <div style="flex:1 1 300px;min-height:440px;border-right:1px dashed #A6A39B;border-bottom:1px dashed #A6A39B;display:flex;flex-direction:column;background:#1C1A17;color:#FAFAF9">
+          <div style="display:flex;justify-content:space-between;padding:16px 20px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#A29F97"><span>EXP-03 · {{ t.e3 }}</span><span>03</span></div>
+          <div onPointerMove="{{ magMove }}" onPointerLeave="{{ magLeave }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;min-height:280px">
+            <div data-mag=""><button onClick="{{ addClick }}" style="width:148px;height:148px;border-radius:50%;border:1px dashed #8E8B83;cursor:pointer;background:#FAFAF9;color:#1C1A17;font-family:'EB Garamond',serif;font-style:italic;font-size:24px;transition:transform 160ms ease-out" style-active="transform:scale(.92)">{{ t.touch }}</button></div>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#A29F97">{{ clicks }} {{ t.clicks }}</span>
+          </div>
+          <div style="padding:16px 20px;font-size:14px;color:#B9B6AE">{{ t.e3d }}</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="archivo" data-stack="" data-screen-label="Archivo" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) clamp(72px,10vw,128px)">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">06</span><span>/ 07</span><span>{{ t.s5 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-dim="" aria-hidden="true" style="position:absolute;inset:0;z-index:6;background:#1C1A17;opacity:0;pointer-events:none"></div>
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(36px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:16px"><span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952">{{ t.arK }}</span><h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(44px,5.4vw,76px);line-height:.98;letter-spacing:-.025em;text-wrap:balance">{{ t.arT }}</h2></div>
+        <div style="display:flex;align-items:center;gap:18px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5C5952"><span>{{ archCount }} {{ t.arCount }}</span><a href="https://github.com/SebastianGonzzalez?tab=repositories" target="_blank" rel="noopener" style="color:#1C1A17;border-bottom:1px dashed #1C1A17;padding-bottom:4px">GitHub ↗</a></div>
+      </div>
+      <div data-reveal="" style="border-bottom:1px dashed #A6A39B">
+        <sc-for list="{{ archive }}" as="pj" hint-placeholder-count="3">
+          <a href="{{ pj.url }}" target="_blank" rel="noopener" onMouseEnter="{{ mqEnter }}" onMouseLeave="{{ mqLeave }}" onFocus="{{ mqEnter }}" onBlur="{{ mqLeave }}" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;height:clamp(84px,9vw,116px);padding:0 clamp(4px,1vw,14px);border-top:1px dashed #A6A39B;overflow:hidden">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><span style="color:#1C1A17">{{ pj.n }}</span> · {{ pj.kind }}</span>
+            <span style="font-family:'EB Garamond',serif;font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.02em;white-space:nowrap">{{ pj.name }}</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5C5952;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pj.meta }} ↗</span>
+            <div data-mq="" aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;background:#1C1A17;transform:translateY(101%)">
+              <div style="width:100%;height:100%;transform:translateY(-101%)">
+                <div style="display:flex;align-items:center;height:100%;width:max-content">
+                  <sc-for list="{{ pj.reps }}" as="r" hint-placeholder-count="8">
+                    <span style="flex:none;display:flex;align-items:center;gap:clamp(18px,2.2vw,32px);padding-right:clamp(18px,2.2vw,32px)">
+                      <span style="font-family:'EB Garamond',serif;font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.02em;color:#FAFAF9;white-space:nowrap">{{ r.name }}</span>
+                      <sc-if value="{{ r.hasImg }}" hint-placeholder-val="{{ false }}"><span style="flex:none;height:clamp(60px,6.6vw,88px);aspect-ratio:16/10;border-radius:6px;border:1px solid #3A3733;box-shadow:0 6px 18px rgba(0,0,0,.35);background:#2A2724 url({{ r.img }}) center/cover no-repeat"></span></sc-if>
+                      <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#A29F97;white-space:nowrap">{{ r.lang }}</span>
+                    </span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="contacto" data-stack="" data-screen-label="Contacto" style="position:relative;background:#FFFFFF;box-shadow:0 -28px 56px -28px rgba(28,26,23,.22);padding:clamp(88px,11vw,140px) clamp(20px,4vw,56px) 0">
+      <div data-divider="" aria-hidden="true" style="position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none"><span data-line="" style="position:absolute;left:0;right:0;top:0;border-top:1px dashed #8E8B83;transform-origin:left center"></span><span data-tab="" style="position:absolute;left:clamp(20px,4vw,56px);top:0;display:flex;gap:10px;padding:8px 12px;border:1px dashed #8E8B83;border-top:0;background:#FFFFFF;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5C5952"><span style="color:#1C1A17">07</span><span>/ 07</span><span>{{ t.s6 }}</span></span><span data-tab="" style="position:absolute;right:clamp(20px,4vw,56px);top:-4px;width:8px;height:8px;border-right:1.5px solid #1C1A17;border-top:1.5px solid #1C1A17;transform:translateY(4px)"></span></div>
+      <div data-reveal="" style="position:relative;background:#1C1A17;color:#FAFAF9;padding:clamp(32px,5vw,72px);display:flex;flex-wrap:wrap;gap:clamp(32px,4vw,64px);align-items:flex-end">
+        <div style="flex:1.2 1 420px;display:flex;flex-direction:column;gap:22px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A29F97">{{ t.ctK }}</span>
+          <h2 style="margin:0;font-family:'EB Garamond',serif;font-weight:500;font-size:clamp(46px,6vw,92px);line-height:.96;letter-spacing:-.025em;text-wrap:balance">{{ t.ctT1 }}<em style="font-weight:400">{{ t.ctT2 }}</em></h2>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#B9B6AE;max-width:460px">{{ t.ctD }}</p>
+        </div>
+        <div style="flex:1 1 340px;display:flex;flex-direction:column;align-items:flex-start;gap:18px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#A29F97">{{ t.dockK }}</span>
+          <div ref="{{ dockRef }}" onMouseMove="{{ dockMove }}" onMouseLeave="{{ dockLeave }}" style="display:flex;align-items:flex-end;gap:14px;height:76px;padding:0 16px 12px;box-sizing:border-box;border:1px dashed #4A4640;border-radius:22px;background:#262320">
+            <sc-for list="{{ dockItems }}" as="d" hint-placeholder-count="4">
+              <a data-dock="" href="{{ d.href }}" target="{{ d.target }}" rel="noopener" aria-label="{{ d.label }}" onClick="{{ d.click }}" onMouseEnter="{{ d.enter }}" onFocus="{{ d.enter }}" style="position:relative;flex:none;width:52px;height:52px;border-radius:50%;background:#FAFAF9;display:flex;align-items:center;justify-content:center">
+                <span style="position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY({{ d.tipY }});opacity:{{ d.tipO }};transition:opacity 180ms ease-out,transform 220ms cubic-bezier(.22,1,.36,1);pointer-events:none;white-space:nowrap;padding:5px 10px;border-radius:6px;background:#FAFAF9;color:#1C1A17;font-family:'Geist Mono',monospace;font-size:11px">{{ d.label }}</span>
+                <span aria-hidden="true" style="width:44%;height:44%;background:url({{ d.icon }}) center/contain no-repeat"></span>
+              </a>
+            </sc-for>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#B9B6AE;min-height:18px">{{ dockCaption }}</span>
+        </div>
+      </div>
+      <footer style="padding:clamp(48px,6vw,80px) 0 28px;display:flex;flex-direction:column;gap:28px">
+        <div style="position:relative;height:clamp(96px,13vw,200px);margin:0 calc(-1 * clamp(8px,1vw,16px))"><x-import component="TechText" from="./TechText.jsx" text="Sebastián González" font-family="'EB Garamond', serif" font-weight="500" font-size="240" letter-spacing="-0.03" color="#1C1A17" accent-color="#1C1A17" dash-length="4" dash-gap="2" stroke-width="1.2" specks="15" reveal="letter" reach="180" hint-size="100%,100%" style="position:absolute;inset:0"></x-import></div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:18px;border-top:1px dashed #A6A39B;font-family:'Geist Mono',monospace;font-size:12px;color:#5C5952"><span>{{ t.footer }}</span><span>{{ time }} · {{ t.localTime }}</span><a href="#top" style-hover="color:#1C1A17">{{ t.top }}</a></div>
+      </footer>
+    </section>
+  </div>
+
+  <div aria-hidden="true" style="position:fixed;left:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);z-index:55;display:flex;align-items:center;gap:12px;height:48px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(28,26,23,.08);box-shadow:0 1px 2px rgba(28,26,23,.06),0 8px 24px rgba(28,26,23,.06);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C5952">
+    <span><span style="color:#1C1A17">{{ secNum }}</span> / 07</span>
+    <span style="display:flex;gap:3px"><sc-for list="{{ secDots }}" as="d" hint-placeholder-count="7"><span style="width:14px;height:3px;border-radius:1px;background:{{ d.bg }};transition:background 300ms ease-out"></span></sc-for></span>
+    <span style="display:block;height:14px;overflow:hidden;line-height:14px;min-width:84px"><span ref="{{ secLabelEl }}" style="display:block">{{ secLabel }}</span></span>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;preloader&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;stackSections&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;gonzalezsebas519@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const PROJECTS = [
+  { n: '01', name: 'Casa Nua', repo: 'https://github.com/SebastianGonzzalez/Casa_Nua', url: 'github.com/SebastianGonzzalez/Casa_Nua', lang: 'JavaScript', chips: ['JavaScript', 'HTML', 'CSS'], slot: 'v3-casa-nua', site: 'https://sebastiangonzzalez.github.io/Casa_Nua/index.html', img: 'assets/casa-nua.png', flex: '1 1 100%', imgFlex: '1.5 1 440px' },
+  { n: '02', name: 'Doose', repo: 'https://github.com/DuanGomez/Doose', url: 'github.com/DuanGomez/Doose', lang: 'SCSS', chips: ['SCSS', 'HTML', 'Equipo'], slot: 'v3-doose', credit: 'Duman Photography', creditHref: 'https://unsplash.com/photos/sp10n9ixbQU', img: 'https://images.unsplash.com/photo-1584915591129-2fa8cae28577?fm=jpg&q=70&w=1282&h=770&fit=crop&auto=format', site: 'https://github.com/DuanGomez/Doose', flex: '1 1 440px', imgFlex: '1 1 100%' },
+  { n: '03', name: 'Galería visual', repo: 'https://github.com/SebastianGonzzalez/galeria-visual', url: 'github.com/SebastianGonzzalez/galeria-visual', lang: 'TypeScript', chips: ['Next.js', 'TypeScript', 'Tailwind', 'Demo'], slot: 'v3-galeria', img: 'assets/galeria-visual.png', site: 'https://sebastiangonzzalez.github.io/galeria-visual/', flex: '1 1 440px', imgFlex: '1 1 100%' },
+];
+const HREFS = ['#enfoque', '#trabajo', '#github', '#lab', '#contacto'];
+const OG = 'https://opengraph.githubassets.com/1/';
+const NAMES = { Casa_Nua: 'Casa Nua', 'galeria-visual': 'Galería visual', Doose: 'Doose' };
+const KINDS = { Casa_Nua: 'E-commerce', 'galeria-visual': 'Experimento', Doose: 'Sitio web' };
+const COLLAB = [{ full: 'DuanGomez/Doose', name: 'Doose', lang: 'SCSS', year: '2026', key: 'Doose' }];
+const ARCHIVE = [
+  { full: 'SebastianGonzzalez/galeria-visual', name: 'Galería visual', lang: 'TypeScript', year: '2026', key: 'galeria-visual' },
+  { full: 'SebastianGonzzalez/Casa_Nua', name: 'Casa Nua', lang: 'JavaScript', year: '2026', key: 'Casa_Nua' },
+  ...COLLAB,
+];
+function prettyRepo(n) { const s = n.replace(/[-_]+/g, ' ').trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
+const TILES = ['HTML', 'CSS', 'JS', 'TS', 'React', 'Next', 'Git', 'Figma', '+'];
+const LEVELS = ['#CAC8C0', '#A6A39B', '#7A776F', '#4A4741', '#1C1A17'];
+const GH_USER = 'SebastianGonzzalez';
+const LANG_C = ['#1C1A17', '#5C5952', '#8E8B83', '#B9B6AE', '#D0CEC6'];
+const SNAP = {
+  stamp: 0, live: false, repos: 2, archive: ARCHIVE,
+  days: { '2026-05-02': [1, 1], '2026-05-04': [2, 2], '2026-09-24': [4, 4], '2026-09-25': [3, 3], '2026-09-26': [4, 4] },
+  langs: [{ n: 'JavaScript', p: 41 }, { n: 'TypeScript', p: 27 }, { n: 'CSS', p: 18 }, { n: 'HTML', p: 14 }],
+  commits: [
+    { h: '7fa3162', m: 'Update README.md', repo: 'galeria-visual', d: '2026-09-26T07:11:58Z' },
+    { h: 'f17727b', m: 'Update README.md', repo: 'galeria-visual', d: '2026-09-26T07:07:05Z' },
+    { h: '7961df8', m: 'Preparar galeria para GitHub Pages', repo: 'galeria-visual', d: '2026-09-26T06:41:48Z' },
+    { h: '84182d5', m: 'flechas login', repo: 'Casa_Nua', d: '2026-09-26T00:51:26Z' },
+    { h: '8a1b732', m: 'Mejorar transicion entre login y registro', repo: 'Casa_Nua', d: '2026-09-26T00:33:13Z' },
+    { h: '2fdaaf3', m: 'cambio login', repo: 'Casa_Nua', d: '2026-09-26T00:19:02Z' },
+  ],
+};
+function isoDay(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+const FACTS = 'Sebastián González es estudiante de 4.º semestre de Ingeniería de Software. Le interesa el desarrollo front-end, el diseño de interfaces y el motion con intención. Tecnologías: HTML, CSS, SCSS, JavaScript, TypeScript, React, Next.js, Tailwind, Git y Figma. Proyectos: Casa Nua (tienda de productos en JavaScript, entrega de Desarrollo Web), Doose (sitio para un estudio de tatuajes en SCSS, en equipo con Duan Gómez) y Galería visual (demo de galería virtual en TypeScript). GitHub: github.com/SebastianGonzzalez. Busca prácticas y proyectos. Contacto: email gonzalezsebas519@gmail.com, teléfono/WhatsApp +57 305 309 0124, Instagram @ss.ebas_.';
+
+const I18N = {
+  es: {
+    phone: 'Teléfono · WhatsApp', dockK: 'Encuéntrame en', dockHint: 'Pasa el cursor · clic para abrir', dockCopy: 'clic para copiar', s0: 'Inicio', s1: 'Enfoque', s2: 'Trabajo', s3: 'GitHub', s4: 'Laboratorio', s5: 'Archivo', s6: 'Contacto',
+    loading: 'Portfolio · cargando', langAria: 'Cambiar idioma', talk: 'Hablemos', close: 'Cerrar', localTime: 'hora local',
+    nav: ['Enfoque', 'Trabajo', 'GitHub', 'Laboratorio'],
+    kicker: 'Ingeniería de Software · 4.º semestre',
+    h1a: 'Construyo interfaces que se sienten ', h1b: 'bien.',
+    hb1: 'Estudiante de Ingeniería de Software. Trabajo con ', and: ' y ', hb2: ' para convertir ideas en productos donde cada detalle tiene una razón.',
+    ctaWork: 'Ver trabajo', ctaCV: 'Descargar CV',
+    isoK: 'Cómo construyo', isoHint: 'pasa el cursor',
+    layers: [
+      { t: 'Tú', d: 'Quien usa la interfaz: lo que ve, toca y siente.' },
+      { t: 'Interacción', d: 'Motion, estados y feedback con intención.' },
+      { t: 'Interfaz', d: 'Componentes accesibles, responsive y consistentes.' },
+      { t: 'Fundamentos', d: 'Lógica, datos, rendimiento y todo lo que no se ve.' },
+    ],
+    enK: 'El enfoque', enT: 'Una capa entre el código y la sensación.',
+    enD: 'Me interesa el punto exacto donde una línea de código se convierte en experiencia: el rebote de un botón, el ritmo de una transición, la jerarquía de una página.',
+    dfK: 'La diferencia', dfT: 'Muchos programan pantallas. Yo diseño cómo se sienten.',
+    dfD: 'Cada transición, estado y microinteracción existe por una razón: que usar algo sea más claro, más rápido y más agradable.',
+    prK: 'Principios',
+    pr: [
+      { t: 'Criterio', d: 'Cada decisión tiene una razón, incluso las que nadie ve.', a: 'decisión → razón → código' },
+      { t: 'Tacto', d: 'Una interfaz se juzga con las manos antes que con los ojos.', a: 'feedback < 100 ms' },
+      { t: 'Detalle', d: 'Cuatro píxeles de diferencia también son diseño.', a: 'grid de 4 px' },
+      { t: 'Constancia', d: 'Cada semestre, una versión mejor que la anterior.', a: '1 release / semestre' },
+    ],
+    wkK: 'Lo más reciente', wkT: 'Proyectos', wkAll: 'Ver todos', arK: 'Archivo', arT: 'Todos los proyectos.', arCount: 'proyectos', other2: 'Repositorio', repo: 'Ver repositorio',
+    proj: [
+      { kind: 'E-commerce', desc: 'Librería en línea para la entrega de Desarrollo Web: catálogo de libros, login y registro con transiciones.', ph: 'Captura — Casa Nua' },
+      { kind: 'Sitio web', desc: 'Página para un estudio de tatuajes, construida en equipo con Duan Gómez.', ph: 'Captura — Doose' },
+      { kind: 'Experimento', desc: 'Demo de una galería virtual: mi primera prueba seria con TypeScript.', ph: 'Captura — Galería visual' },
+    ],
+    cases: [
+      { problem: 'Una tienda necesitaba vender en línea y controlar su inventario sin depender de hojas de cálculo ni de un equipo técnico.',
+        role: 'Desarrollo completo del front-end: arquitectura, lógica de negocio e interfaz. Proyecto individual para Desarrollo Web.',
+        built: ['Login y registro con roles (admin / cliente) y cuentas que el admin activa', 'Panel de administración de usuarios, productos, inventario y ventas', 'Carrito con validación de stock; al confirmar se descuenta el inventario', 'Historial de compras que conserva el precio histórico de cada línea'],
+        decisions: 'JavaScript puro con ES Modules, dividido en 16 módulos (auth, storage, validators…), y localStorage como base de datos simulada. Cero dependencias.',
+        result: '10 pantallas funcionales y responsive, publicadas en GitHub Pages con usuarios demo listos para probar.' },
+      { problem: 'Un estudio de tatuajes necesitaba presentar sus estilos y su trabajo, y atraer clientes desde la web.',
+        role: 'Trabajo en equipo con Duan Gómez: maquetación del front-end y sistema de estilos en SCSS.',
+        built: ['Sitio con secciones de estilos, galería de trabajos y artistas', 'Sistema SCSS con variables, mixins y parciales reutilizables', 'Front-end conectado a un back-end con base de datos', 'Flujo de trabajo en equipo con Git sobre un repositorio compartido'],
+        decisions: 'SCSS modular para mantener la consistencia visual entre páginas, y separación clara entre frontend y backend dentro del repositorio.',
+        result: 'Proyecto colaborativo completo. Corre en local porque depende de la base de datos, por eso no tiene demo pública.' },
+      { problem: 'Artistas y fotógrafos necesitan mostrar su obra de forma inmersiva, no en una cuadrícula genérica de imágenes.',
+        role: 'Proyecto personal: diseño de la interacción, desarrollo y despliegue.',
+        built: ['Rueda 3D de obras que se recorre con el scroll', 'Pantalla de carga e introducción animadas', 'Página propia para cada obra con ruta dinámica /obra/[id]', 'Contenido centralizado en un solo archivo de datos, fácil de editar'],
+        decisions: 'Next.js + TypeScript estricto + Tailwind. Exportación estática y despliegue automático con GitHub Actions.',
+        result: 'Publicada en GitHub Pages y reutilizable como base para portafolios visuales. Mi primer proyecto serio en TypeScript.' },
+    ],
+    cProb: 'El problema', cRole: 'Mi rol', cBuilt: 'Qué construí', cDec: 'Decisiones técnicas', cRes: 'Resultado', cHint: 'Ver caso', cTip: 'Clic para ver el caso completo',
+    ghK: 'Actividad en GitHub', ghT: 'Constancia, medida en commits.',
+    stTotal: 'Contribuciones', stStreak: 'Racha más larga', stDays: 'días', stActive: 'Días activos', stRepos: 'Repos públicos',
+    ghNote: 'Datos reales de github.com/SebastianGonzzalez · se actualizan al cargar', ghLive: 'en vivo', ghSnap: 'última lectura', less: 'Menos', more2: 'Más', langs: 'Lenguajes',
+    months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], tipMany: 'contribuciones', tipOne: 'contribución', tipNone: 'Sin contribuciones',
+    log: [
+      { h: 'a3f9c21', m: 'feat(portfolio): capas isométricas y asistente', tag: 'v0.4 · HEAD' },
+      { h: '7be04d2', m: 'feat(galeria-visual): primera galería en TypeScript', tag: 'v0.3' },
+      { h: '19c7e8a', m: 'style(doose): sistema SCSS junto a Duan Gómez', tag: 'v0.2' },
+      { h: '0d42b6f', m: 'feat(casa-nua): tienda de productos', tag: 'v0.1' },
+      { h: 'e1a0f00', m: 'chore: git init — Ingeniería de Software', tag: 'v0.0' },
+    ],
+    labK: 'Laboratorio', labT: 'Pequeños experimentos que funcionan.',
+    e1: 'Arrastrar', e1d: 'Pointer events + transform, sin dependencias. El interruptor apaga el movimiento de toda la página.',
+    e2: 'Peso variable', e2d: 'Una fuente variable que responde a la distancia del cursor.',
+    e3: 'Magnético', e3d: 'Te sigue dentro de su zona y vuelve con un resorte.',
+    pSend: 'Enviar mensaje', pMotion: 'Movimiento', pNote: 'Cada pieza es un componente real.', touch: 'Tócame', clicks: 'clics',
+    ctK: 'Contacto', ctT1: '¿Construimos algo que se sienta ', ctT2: 'bien?',
+    ctD: 'Busco prácticas, proyectos y gente con quien aprender. Escríbeme y te respondo pronto.',
+    copy: 'Copiar', copied: 'Copiado ✓', footer: '© 2026 Sebastián González · Hecho a mano con Next.js', top: 'Volver arriba ↑',
+    chatBtn: 'Pregúntame', chatTitle: 'Asistente de Sebastián', online: 'En línea',
+    chatHello: '¡Hola! Soy el asistente de Sebastián. Pregúntame por sus proyectos, lo que estudia o cómo contactarlo.',
+    chatPh: 'Escribe tu pregunta…', typing: 'Escribiendo…',
+    quick: ['¿Qué estudias?', '¿Con qué tecnologías trabajas?', 'Cuéntame de Casa Nua', '¿Cómo te contacto?'],
+    canned: {
+      study: 'Estudia Ingeniería de Software y va en 4.º semestre. Le apasiona el front-end y el diseño de interfaces.',
+      tech: 'Trabaja con HTML, CSS/SCSS, JavaScript y TypeScript, y construye con React y Next.js. Usa Git y Figma a diario.',
+      casa: 'Casa Nua es una tienda de productos hecha en JavaScript como entrega de Desarrollo Web. Está en su GitHub.',
+      doose: 'Doose es un sitio para un estudio de tatuajes, hecho en SCSS junto a Duan Gómez.',
+      gal: 'Galería visual es una demo de galería virtual: su primer proyecto serio en TypeScript.',
+      contact: 'Escríbele a gonzalezsebas519@gmail.com o por WhatsApp al +57 305 309 0124. También está en GitHub como @SebastianGonzzalez.',
+      other: 'Buena pregunta. No tengo ese dato, pero Sebastián te responde encantado desde la sección Contacto.',
+    },
+  },
+  en: {
+    phone: 'Phone · WhatsApp', dockK: 'Find me on', dockHint: 'Hover · click to open', dockCopy: 'click to copy', s0: 'Home', s1: 'Approach', s2: 'Work', s3: 'GitHub', s4: 'Lab', s5: 'Archive', s6: 'Contact',
+    loading: 'Portfolio · loading', langAria: 'Switch language', talk: "Let's talk", close: 'Close', localTime: 'local time',
+    nav: ['Approach', 'Work', 'GitHub', 'Lab'],
+    kicker: 'Software Engineering · 4th semester',
+    h1a: 'I build interfaces that feel ', h1b: 'right.',
+    hb1: 'Software Engineering student. I work with ', and: ' and ', hb2: ' to turn ideas into products where every detail has a reason.',
+    ctaWork: 'See work', ctaCV: 'Download CV',
+    isoK: 'How I build', isoHint: 'hover to explode',
+    layers: [
+      { t: 'You', d: 'Whoever uses the interface: what they see, touch and feel.' },
+      { t: 'Interaction', d: 'Motion, states and feedback with intent.' },
+      { t: 'Interface', d: 'Accessible, responsive, consistent components.' },
+      { t: 'Foundations', d: 'Logic, data, performance and everything unseen.' },
+    ],
+    enK: 'The approach', enT: 'A layer between code and feeling.',
+    enD: "I care about the exact point where a line of code becomes an experience: a button's bounce, a transition's rhythm, a page's hierarchy.",
+    dfK: 'The difference', dfT: 'Many people code screens. I design how they feel.',
+    dfD: 'Every transition, state and micro-interaction exists for a reason: to make using something clearer, faster and more pleasant.',
+    prK: 'Principles',
+    pr: [
+      { t: 'Judgment', d: 'Every decision has a reason, even the ones nobody sees.', a: 'decision → reason → code' },
+      { t: 'Touch', d: 'An interface is judged by the hands before the eyes.', a: 'feedback < 100 ms' },
+      { t: 'Detail', d: 'Four pixels of difference are design too.', a: '4 px grid' },
+      { t: 'Consistency', d: 'Every semester, a better version than the last.', a: '1 release / semester' },
+    ],
+    wkK: 'Latest work', wkT: 'Projects', wkAll: 'See all', arK: 'Archive', arT: 'Every project.', arCount: 'projects', other2: 'Repository', repo: 'View repository',
+    proj: [
+      { kind: 'E-commerce', desc: 'Online bookstore for my Web Development course: book catalog, login and sign-up with transitions.', ph: 'Screenshot — Casa Nua' },
+      { kind: 'Website', desc: 'Site for a tattoo studio, built together with Duan Gómez.', ph: 'Screenshot — Doose' },
+      { kind: 'Experiment', desc: 'Virtual gallery demo — my first serious TypeScript project.', ph: 'Screenshot — Visual gallery' },
+    ],
+    cases: [
+      { problem: 'A store needed to sell online and track its inventory without relying on spreadsheets or a technical team.',
+        role: 'Full front-end development: architecture, business logic and interface. Solo project for Web Development.',
+        built: ['Login and sign-up with roles (admin / customer) and admin-approved accounts', 'Admin panel for users, products, inventory and sales', 'Cart with stock validation; confirming a purchase updates inventory', 'Purchase history that keeps the historical price of each line'],
+        decisions: 'Vanilla JavaScript with ES Modules, split into 16 modules (auth, storage, validators…), with localStorage as a simulated database. Zero dependencies.',
+        result: '10 working, responsive screens, live on GitHub Pages with demo users ready to try.' },
+      { problem: 'A tattoo studio needed to present its styles and work, and attract clients from the web.',
+        role: 'Team project with Duan Gómez: front-end layout and the SCSS styling system.',
+        built: ['Site with sections for styles, portfolio and artists', 'SCSS system with variables, mixins and reusable partials', 'Front-end connected to a back-end with a database', 'Team workflow with Git on a shared repository'],
+        decisions: 'Modular SCSS to keep visuals consistent across pages, and a clear frontend / backend split in the repo.',
+        result: 'Complete team project. It runs locally because it depends on the database, so there is no public demo.' },
+      { problem: 'Artists and photographers need to show their work in an immersive way, not in a generic image grid.',
+        role: 'Personal project: interaction design, development and deployment.',
+        built: ['3D wheel of works you browse by scrolling', 'Animated loading screen and intro', 'Dedicated page per work with dynamic route /obra/[id]', 'Content centralised in one easy-to-edit data file'],
+        decisions: 'Next.js + strict TypeScript + Tailwind. Static export and automatic deployment with GitHub Actions.',
+        result: 'Live on GitHub Pages and reusable as a base for visual portfolios. My first serious TypeScript project.' },
+    ],
+    cProb: 'The problem', cRole: 'My role', cBuilt: 'What I built', cDec: 'Technical decisions', cRes: 'Outcome', cHint: 'View case', cTip: 'Click to see the full case',
+    ghK: 'GitHub activity', ghT: 'Consistency, measured in commits.',
+    stTotal: 'Contributions', stStreak: 'Longest streak', stDays: 'days', stActive: 'Active days', stRepos: 'Public repos',
+    ghNote: 'Real data from github.com/SebastianGonzzalez · refreshed on load', ghLive: 'live', ghSnap: 'last read', less: 'Less', more2: 'More', langs: 'Languages',
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], tipMany: 'contributions', tipOne: 'contribution', tipNone: 'No contributions',
+    log: [
+      { h: 'a3f9c21', m: 'feat(portfolio): isometric layers and assistant', tag: 'v0.4 · HEAD' },
+      { h: '7be04d2', m: 'feat(galeria-visual): first gallery in TypeScript', tag: 'v0.3' },
+      { h: '19c7e8a', m: 'style(doose): SCSS system with Duan Gómez', tag: 'v0.2' },
+      { h: '0d42b6f', m: 'feat(casa-nua): product store', tag: 'v0.1' },
+      { h: 'e1a0f00', m: 'chore: git init — Software Engineering', tag: 'v0.0' },
+    ],
+    labK: 'Lab', labT: 'Small experiments that actually work.',
+    e1: 'Drag', e1d: 'Pointer events + transform, no dependencies. The switch turns off motion for the whole page.',
+    e2: 'Variable weight', e2d: 'A variable font that responds to cursor distance.',
+    e3: 'Magnetic', e3d: 'Follows you inside its zone and springs back.',
+    pSend: 'Send message', pMotion: 'Motion', pNote: 'Every piece is a real component.', touch: 'Touch me', clicks: 'clicks',
+    ctK: 'Contact', ctT1: 'Shall we build something that feels ', ctT2: 'right?',
+    ctD: "I'm looking for internships, projects and people to learn with. Write to me and I'll get back soon.",
+    copy: 'Copy', copied: 'Copied ✓', footer: '© 2026 Sebastián González · Handmade with Next.js', top: 'Back to top ↑',
+    chatBtn: 'Ask me', chatTitle: "Sebastián's assistant", online: 'Online',
+    chatHello: "Hi! I'm Sebastián's assistant. Ask me about his projects, what he studies or how to reach him.",
+    chatPh: 'Type your question…', typing: 'Typing…',
+    quick: ['What do you study?', 'What tech do you use?', 'Tell me about Casa Nua', 'How can I reach you?'],
+    canned: {
+      study: "He studies Software Engineering and is in his 4th semester. He's passionate about front-end and interface design.",
+      tech: 'He works with HTML, CSS/SCSS, JavaScript and TypeScript, and builds with React and Next.js. Git and Figma daily.',
+      casa: 'Casa Nua is a product store built in JavaScript for his Web Development course. It is on his GitHub.',
+      doose: 'Doose is a site for a tattoo studio, built in SCSS together with Duan Gómez.',
+      gal: 'Visual gallery is a virtual gallery demo — his first serious TypeScript project.',
+      contact: 'Email him at gonzalezsebas519@gmail.com or WhatsApp +57 305 309 0124. He is also on GitHub as @SebastianGonzzalez.',
+      other: "Good question! I don't have that detail, but Sebastián will happily answer via the Contact section.",
+    },
+  },
+};
+
+function buildYear(year, lang, days) {
+  const T = I18N[lang];
+  const jan1 = new Date(year, 0, 1), off = jan1.getDay();
+  const today = new Date();
+  const cells = [];
+  let total = 0, streak = 0, best = 0, active = 0, elapsed = 0;
+  for (let w = 0; w < 53; w++) for (let d = 0; d < 7; d++) {
+    const date = new Date(year, 0, 1 + w * 7 + d - off);
+    if (date.getFullYear() !== year) { cells.push({ bg: 'transparent', bd: '0', tip: '' }); continue; }
+    if (date > today) { cells.push({ bg: 'transparent', bd: '1px dashed #B4B1A9', tip: '' }); continue; }
+    elapsed++;
+    const e = days[isoDay(date)], n = e ? e[0] : 0;
+    total += n;
+    if (n) { active++; streak++; best = Math.max(best, streak); } else streak = 0;
+    const lv = n ? Math.min(4, Math.max(1, e[1] || 1)) : 0;
+    const ds = date.toLocaleDateString(lang === 'es' ? 'es' : 'en', { day: 'numeric', month: 'short' });
+    cells.push({ bg: LEVELS[lv], bd: '0', tip: n ? `${n} ${n === 1 ? T.tipOne : T.tipMany} · ${ds}` : `${T.tipNone} · ${ds}` });
+  }
+  const months = T.months.map((l, m) => {
+    const doy = Math.round((new Date(year, m, 1) - jan1) / 864e5);
+    return { l, col: String(Math.floor((doy + off) / 7) + 1) };
+  });
+  return { cells, months, total, streak: best, active };
+}
+
+class Component extends DCLogic {
+  state = { feat: 0, sec: 0, lang: 'es', wide: true, time: '', copied: false, motionOn: true, clicks: 0, dockHover: -1, gh: SNAP, chatOpen: false, msgs: null, input: '', busy: false };
+  root = React.createRef(); pre = React.createRef(); preNum = React.createRef(); preBar = React.createRef();
+  isoStage = React.createRef(); isoGroup = React.createRef(); ghWrap = React.createRef(); ghTip = React.createRef();
+  weightBox = React.createRef(); msgBox = React.createRef(); secLabelEl = React.createRef(); progRing = React.createRef(); dockRef = React.createRef(); projGrid = React.createRef();
+  ios = []; z = 10; ghCache = {};
+
+  componentDidMount() {
+    const w = window;
+    this._lang = this.state.lang;
+    this.prefersReduced = w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.motion = (this.props.motion ?? true) && !this.prefersReduced;
+    this.onResize = () => { const wide = w.innerWidth >= 960; if (wide !== this.state.wide) this.setState({ wide }); this.isoScale(); this.applyIso(); };
+    this._mv = (e) => this.onDragMove(e); this._up = () => this.onDragUp();
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.chatOpen) this.setState({ chatOpen: false }); };
+    w.addEventListener('resize', this.onResize); w.addEventListener('pointermove', this._mv); w.addEventListener('pointerup', this._up); w.addEventListener('keydown', this.onKey);
+    this.tick(); this.clock = setInterval(this.tick, 15000);
+    this.rx = 0; this.ry = 0; this.spread = 0;
+    this.onResize();
+    this.initReveal(); this.runIntro(); this.initStack(); this.loadGitHub();
+  }
+
+  async loadGitHub() {
+    const j = (u) => fetch(u).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    const y = new Date().getFullYear();
+    const [cal, repos] = await Promise.all([j(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=${y}`), j(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=pushed`)]);
+    const next = {};
+    if (cal && Array.isArray(cal.contributions)) { const days = {}; cal.contributions.forEach((d) => { if (d.count) days[d.date] = [d.count, d.level]; }); next.days = days; }
+    if (Array.isArray(repos)) {
+      const own = repos.filter((r) => !r.fork);
+      next.repos = own.length;
+      const arch = own.filter((r) => r.name !== GH_USER).map((r) => ({ full: r.full_name, key: r.name, name: NAMES[r.name] || prettyRepo(r.name), lang: r.language || '—', year: String(new Date(r.created_at).getFullYear()) }));
+      COLLAB.forEach((c) => { if (!arch.some((a) => a.full === c.full)) arch.push(c); });
+      if (arch.length) next.archive = arch;
+      const [langs, commits] = await Promise.all([
+        Promise.all(own.map((r) => j(r.languages_url))),
+        Promise.all(own.map((r) => j(`https://api.github.com/repos/${r.full_name}/commits?per_page=10`).then((c) => (Array.isArray(c) ? c.map((x) => ({ h: x.sha.slice(0, 7), m: x.commit.message.split('\n')[0], repo: r.name, d: x.commit.author.date })) : [])))),
+      ]);
+      const bytes = {};
+      langs.forEach((l) => l && Object.entries(l).forEach(([k, v]) => { bytes[k] = (bytes[k] || 0) + v; }));
+      const sum = Object.values(bytes).reduce((a, b) => a + b, 0);
+      if (sum) {
+        const arr = Object.entries(bytes).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([n, v]) => ({ n, p: Math.round((v / sum) * 100) }));
+        arr[0].p += 100 - arr.reduce((a, b) => a + b.p, 0);
+        next.langs = arr.filter((l) => l.p > 0);
+      }
+      const flat = commits.flat().sort((a, b) => (a.d < b.d ? 1 : -1)).slice(0, 6);
+      if (flat.length) next.commits = flat;
+    }
+    if (Object.keys(next).length) this.setState((p) => ({ gh: { ...p.gh, ...next, live: true, stamp: Date.now() } }));
+  }
+
+  initStack() {
+    this.stackOn = this.props.stackSections ?? true;
+    this.layoutStack();
+    this.onScrollS = () => { if (this.sRaf) return; this.sRaf = requestAnimationFrame(() => { this.sRaf = 0; this.stackFrame(); }); };
+    window.addEventListener('scroll', this.onScrollS, { passive: true });
+    this.onAnchor = (e) => {
+      const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+      const id = a.getAttribute('href').slice(1);
+      const i = (this.secs || []).findIndex((s) => s.id === id); if (i < 0) return;
+      e.preventDefault();
+      const cont = this.secs[0].parentElement;
+      let y = cont.getBoundingClientRect().top + window.scrollY;
+      for (let k = 0; k < i; k++) y += this.secs[k].offsetHeight;
+      window.scrollTo({ top: Math.max(0, Math.round(y)), behavior: this.motion ? 'smooth' : 'auto' });
+    };
+    this.root.current.addEventListener('click', this.onAnchor);
+    if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => { this.layoutStack(); this.stackFrame(); }); this.ro.observe(this.root.current); }
+    const divs = [...this.root.current.querySelectorAll('[data-divider]')];
+    if (this.motion && 'IntersectionObserver' in window) {
+      const vh = window.innerHeight;
+      this.dio = new IntersectionObserver((ents) => ents.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const d = en.target, line = d.querySelector('[data-line]'), tabs = d.querySelectorAll('[data-tab]');
+        line.style.transition = 'transform 1100ms cubic-bezier(.76,0,.24,1)'; line.style.transform = 'scaleX(1)';
+        tabs.forEach((tb, i) => { tb.style.transition = `opacity 500ms ease-out ${550 + i * 200}ms, clip-path 700ms cubic-bezier(.76,0,.24,1) ${550 + i * 200}ms`; tb.style.opacity = '1'; tb.style.clipPath = 'inset(0 0 0 0)'; });
+        this.dio.unobserve(d);
+      }), { rootMargin: '0px 0px -12% 0px' });
+      divs.forEach((d) => {
+        if (d.getBoundingClientRect().top < vh * 0.88) return;
+        d.querySelector('[data-line]').style.transform = 'scaleX(0)';
+        d.querySelectorAll('[data-tab]').forEach((tb) => { tb.style.opacity = '0'; tb.style.clipPath = 'inset(0 0 100% 0)'; });
+        this.dio.observe(d);
+      });
+    }
+    this.stackFrame();
+  }
+  layoutStack() {
+    const vh = window.innerHeight;
+    this.secs = [...this.root.current.querySelectorAll('[data-stack]')];
+    this.secs.forEach((s, i) => {
+      s._dim = s.querySelector(':scope > [data-dim]');
+      if (!this.stackOn) { s.style.position = 'relative'; s.style.top = ''; return; }
+      const top = Math.min(0, vh - s.offsetHeight);
+      s.style.position = 'sticky'; s.style.top = top + 'px'; s.style.zIndex = String(i + 1);
+      s.style.transformOrigin = `50% ${Math.round(-top + vh / 2)}px`;
+    });
+  }
+  stackFrame() {
+    const secs = this.secs || [], vh = window.innerHeight;
+    const ring = this.progRing.current;
+    if (ring) { const max = document.documentElement.scrollHeight - vh; const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0; const d = p * 360;
+      ring.style.background = p < 0.003 ? 'none' : `conic-gradient(#1C1A17 0deg, #1C1A17 ${Math.max(0, d - 56).toFixed(1)}deg, #E5E5E3 ${Math.max(0, d - 12).toFixed(1)}deg, #1C1A17 ${d.toFixed(1)}deg, transparent ${d.toFixed(1)}deg)`;
+    }
+    let cur = 0;
+    for (let i = 0; i < secs.length; i++) {
+      const s = secs[i];
+      if (s.getBoundingClientRect().top <= vh * 0.5) cur = i;
+      if (i === secs.length - 1 || !this.stackOn) continue;
+      const nt = secs[i + 1].getBoundingClientRect().top;
+      const p = Math.min(1, Math.max(0, (vh - nt) / vh));
+      const prev = s._p;
+      if (p === prev) continue;
+      s._p = p;
+      if (this.motion) {
+        s.style.transform = p > 0 ? `perspective(1800px) rotateX(${(p * 6).toFixed(2)}deg) scale(${(1 - p * 0.07).toFixed(4)})` : '';
+        s.style.willChange = p > 0 && p < 1 ? 'transform' : '';
+      } else s.style.transform = '';
+      if (s._dim) s._dim.style.opacity = (p * 0.3).toFixed(3);
+      if (i === 0) { this.heroP = p; if (!this.hoverIso && this.motion && (p > 0 || prev > 0)) { this.spread = p * 2.6; this.applyIso(); } }
+    }
+    if (cur !== this.state.sec) this.setState({ sec: cur });
+  }
+  componentWillUnmount() {
+    const w = window;
+    w.removeEventListener('resize', this.onResize); w.removeEventListener('pointermove', this._mv); w.removeEventListener('pointerup', this._up); w.removeEventListener('keydown', this.onKey);
+    clearInterval(this.clock); cancelAnimationFrame(this.wRaf); if (this.io) this.io.disconnect();
+    window.removeEventListener('scroll', this.onScrollS);
+    if (this.root.current && this.onAnchor) this.root.current.removeEventListener('click', this.onAnchor); if (this.ro) this.ro.disconnect(); if (this.dio) this.dio.disconnect();
+  }
+  componentDidUpdate() {
+    if (this._lang !== this.state.lang) { this._lang = this.state.lang; document.documentElement.lang = this.state.lang; }
+    if (this._sec !== this.state.sec) {
+      const first = this._sec === undefined; this._sec = this.state.sec;
+      const el = this.secLabelEl.current;
+      if (!first && el && el.animate && this.motion) el.animate([{ transform: 'translateY(100%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+    }
+    const mb = this.msgBox.current; if (mb && this._mc !== (this.state.msgs || []).length) { this._mc = (this.state.msgs || []).length; mb.scrollTop = mb.scrollHeight; }
+  }
+  tick = () => { this.setState({ time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }); };
+
+  isoScale() { const st = this.isoStage.current; if (!st) return; this.sc = Math.min(1, (st.offsetWidth - 8) / 600, (st.offsetHeight - 40) / 580); }
+  applyIso() {
+    const g = this.isoGroup.current; if (!g) return;
+    g.style.transform = `translate(-50%,-50%) scale(${(this.sc || 1).toFixed(3)}) rotateX(${(14 - this.ry).toFixed(2)}deg) rotateY(${(-26 + this.rx).toFixed(2)}deg) rotateZ(-7deg)`;
+    g.querySelectorAll('[data-z]').forEach((el) => { el.style.transform = `translateZ(${(+el.dataset.z * this.spread * 20).toFixed(1)}px)`; });
+  }
+  isoMove = (e) => {
+    if (!this.motion) return;
+    const st = this.isoStage.current, r = st.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+    this.hoverIso = true; this.rx = nx * 12; this.ry = ny * 8; this.spread = Math.max(1, (this.heroP || 0) * 2.6); this.applyIso();
+  };
+  isoLeave = () => { this.hoverIso = false; this.rx = 0; this.ry = 0; this.spread = this.motion ? (this.heroP || 0) * 2.6 : 0; this.applyIso(); };
+
+  runIntro() {
+    const pre = this.pre.current; if (!pre) return;
+    const intro = [...this.root.current.querySelectorAll('[data-intro]')];
+    const g = this.isoGroup.current;
+    let seen = false; try { seen = !!sessionStorage.getItem('sg3-intro'); } catch (e) {}
+    if (!this.motion) { pre.style.display = 'none'; return; }
+    intro.forEach((el) => { el.style.opacity = '0'; el.style.filter = 'blur(10px)'; el.style.transform = 'translateY(18px)'; });
+    if (g) { g.style.opacity = '0'; this.spread = 4; this.applyIso(); }
+    const reveal = () => {
+      intro.forEach((el, i) => {
+        el.style.transition = `opacity 900ms cubic-bezier(.22,1,.36,1) ${i * 90}ms, filter 900ms cubic-bezier(.22,1,.36,1) ${i * 90}ms, transform 900ms cubic-bezier(.22,1,.36,1) ${i * 90}ms`;
+        el.style.opacity = '1'; el.style.filter = 'none'; el.style.transform = 'none';
+      });
+      if (g) {
+        g.style.transition = 'opacity 900ms ease-out, transform 700ms cubic-bezier(.22,1,.36,1)';
+        g.style.opacity = '1';
+        const zs = [...g.querySelectorAll('[data-z]')];
+        zs.forEach((el) => { el.style.transition = `transform 1400ms cubic-bezier(.22,1,.36,1) ${300 + (4 - +el.dataset.z) * 90}ms`; });
+        setTimeout(() => { this.spread = 0; this.applyIso(); }, 60);
+        setTimeout(() => zs.forEach((el) => { el.style.transition = 'transform 700ms cubic-bezier(.22,1,.36,1)'; }), 2200);
+      }
+    };
+    if (seen || !(this.props.preloader ?? true)) { pre.style.display = 'none'; requestAnimationFrame(() => requestAnimationFrame(reveal)); return; }
+    try { sessionStorage.setItem('sg3-intro', '1'); } catch (e) {}
+    const t0 = performance.now(), D = 1200;
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+      if (this.preNum.current) this.preNum.current.textContent = String(Math.round(e * 100)).padStart(3, '0');
+      if (this.preBar.current) this.preBar.current.style.transform = `scaleX(${e})`;
+      if (k < 1) return requestAnimationFrame(step);
+      pre.style.transition = 'opacity 600ms ease-out, filter 600ms ease-out';
+      pre.style.opacity = '0'; pre.style.filter = 'blur(8px)';
+      setTimeout(reveal, 120);
+      setTimeout(() => { pre.style.display = 'none'; }, 620);
+    };
+    requestAnimationFrame(step);
+  }
+
+  initReveal() {
+    if (!this.motion || !('IntersectionObserver' in window)) return;
+    const vh = window.innerHeight;
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        el.style.transition = 'opacity 900ms cubic-bezier(.22,1,.36,1), filter 900ms cubic-bezier(.22,1,.36,1), transform 900ms cubic-bezier(.22,1,.36,1), background 260ms ease-out';
+        el.style.opacity = '1'; el.style.filter = 'none'; el.style.transform = 'none';
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    this.root.current.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (el.getBoundingClientRect().top > vh) { el.style.opacity = '0'; el.style.filter = 'blur(8px)'; el.style.transform = 'translateY(28px)'; this.io.observe(el); }
+    });
+  }
+
+  ghOver = (e) => {
+    const tip = e.target && e.target.dataset ? e.target.dataset.tip : '';
+    const t = this.ghTip.current, wrap = this.ghWrap.current; if (!t || !wrap) return;
+    if (!tip) { t.style.opacity = '0'; return; }
+    const wr = wrap.getBoundingClientRect(), cr = e.target.getBoundingClientRect(), s = wr.width / wrap.offsetWidth || 1;
+    t.textContent = tip; t.style.opacity = '1';
+    const x = (cr.left - wr.left) / s + 6 - t.offsetWidth / 2, y = (cr.top - wr.top) / s - 34;
+    t.style.transform = `translate(${Math.max(0, Math.min(wrap.offsetWidth - t.offsetWidth, x))}px, ${y}px)`;
+  };
+  ghOut = () => { if (this.ghTip.current) this.ghTip.current.style.opacity = '0'; };
+
+  startDrag = (e) => {
+    const el = e.currentTarget, s = el.getBoundingClientRect().width / el.offsetWidth || 1;
+    this.moved = false;
+    this.d = { el, sx: e.clientX, sy: e.clientY, bx: +el.dataset.tx || 0, by: +el.dataset.ty || 0, s };
+    el.style.transition = 'box-shadow 160ms ease-out'; el.style.zIndex = ++this.z; el.style.cursor = 'grabbing';
+    el.style.boxShadow = '0 16px 36px rgba(28,26,23,.2)';
+    e.preventDefault();
+  };
+  onDragMove(e) {
+    const d = this.d; if (!d) return;
+    const dx = (e.clientX - d.sx) / d.s, dy = (e.clientY - d.sy) / d.s;
+    if (Math.abs(dx) + Math.abs(dy) > 3) this.moved = true;
+    d.tx = d.bx + dx; d.ty = d.by + dy;
+    const tilt = this.motion ? Math.max(-7, Math.min(7, (e.movementX || 0) * 0.6)) : 0;
+    d.el.style.transform = `translate(${d.tx}px,${d.ty}px) rotate(${tilt}deg) scale(1.03)`;
+  }
+  onDragUp() {
+    const d = this.d; if (!d) return;
+    const tx = d.tx ?? d.bx, ty = d.ty ?? d.by;
+    d.el.dataset.tx = tx; d.el.dataset.ty = ty;
+    d.el.style.transition = 'transform 360ms cubic-bezier(.22,1,.36,1), box-shadow 360ms cubic-bezier(.22,1,.36,1)';
+    d.el.style.transform = `translate(${tx}px,${ty}px)`; d.el.style.cursor = 'grab'; d.el.style.boxShadow = '';
+    this.d = null;
+  }
+  toggleMotion = () => {
+    if (this.moved) return;
+    const on = !this.state.motionOn;
+    this.motion = on && !this.prefersReduced && (this.props.motion ?? true);
+    if (!this.motion) this.isoLeave();
+    this.setState({ motionOn: on });
+  };
+
+  enterW = () => {
+    const box = this.weightBox.current; if (!box) return;
+    this.wS = box.getBoundingClientRect().width / box.offsetWidth || 1;
+    this.wRects = [...box.querySelectorAll('[data-l]')].map((el) => { const r = el.getBoundingClientRect(); return { el, cx: r.left + r.width / 2, cy: r.top + r.height / 2 }; });
+  };
+  moveW = (e) => {
+    const x = e.clientX, y = e.clientY;
+    cancelAnimationFrame(this.wRaf);
+    this.wRaf = requestAnimationFrame(() => {
+      if (!this.wRects) this.enterW();
+      const R = 170 * (this.wS || 1);
+      for (const l of this.wRects || []) { const t = Math.max(0, 1 - Math.hypot(x - l.cx, y - l.cy) / R); l.el.style.fontWeight = Math.round(200 + 700 * t * t * (3 - 2 * t)); }
+    });
+  };
+  leaveW = () => { cancelAnimationFrame(this.wRaf); (this.wRects || []).forEach((l) => { l.el.style.fontWeight = ''; }); this.wRects = null; };
+
+  magMove = (e) => {
+    if (!this.motion) return;
+    const wrap = e.currentTarget, m = wrap.querySelector('[data-mag]'); if (!m) return;
+    const r = wrap.getBoundingClientRect(), s = r.width / wrap.offsetWidth || 1;
+    const dx = (e.clientX - (r.left + r.width / 2)) / s, dy = (e.clientY - (r.top + r.height / 2)) / s;
+    m.style.transition = 'transform 220ms cubic-bezier(.22,1,.36,1)'; m.style.transform = `translate(${dx * 0.32}px, ${dy * 0.32}px)`;
+  };
+  magLeave = (e) => { const m = e.currentTarget.querySelector('[data-mag]'); if (!m) return; m.style.transition = 'transform 700ms cubic-bezier(.34,1.56,.64,1)'; m.style.transform = 'translate(0,0)'; };
+
+  dockMove = (e) => { this.dmx = e.clientX; this.dockKick(); };
+  dockLeave = () => { this.dmx = null; this.dockKick(); if (this.state.dockHover !== -1) this.setState({ dockHover: -1 }); };
+  dockKick() { if (!this.dRaf) this.dRaf = requestAnimationFrame(this.dockStep); }
+  dockStep = () => {
+    this.dRaf = 0; const box = this.dockRef.current; if (!box) return;
+    const items = [...box.querySelectorAll('[data-dock]')], sc = box.getBoundingClientRect().width / box.offsetWidth || 1;
+    if (!this.dw || this.dw.length !== items.length) this.dw = items.map(() => ({ w: 52, v: 0 }));
+    let busy = false;
+    items.forEach((el, i) => {
+      let target = 52;
+      if (this.dmx != null && this.motion) { const r = el.getBoundingClientRect(); const dist = Math.abs(this.dmx - (r.left + r.width / 2)) / sc; if (dist < 150) target = 52 + 34 * (Math.cos((dist / 150) * Math.PI) + 1) / 2; }
+      const st = this.dw[i]; st.v = st.v * 0.62 + (target - st.w) * 0.28; st.w += st.v;
+      if (Math.abs(target - st.w) > 0.15 || Math.abs(st.v) > 0.15) busy = true;
+      el.style.width = el.style.height = st.w.toFixed(2) + 'px';
+    });
+    if (busy) this.dockKick();
+  };
+
+  mq(e, on) {
+    const row = e.currentTarget, ov = row && row.querySelector('[data-mq]'); if (!ov) return;
+    const inner = ov.firstElementChild, track = inner.firstElementChild;
+    const r = row.getBoundingClientRect();
+    const top = e.clientY == null || e.clientY === 0 ? true : e.clientY - r.top < r.height / 2;
+    const off = top ? 'translateY(-101%)' : 'translateY(101%)', inv = top ? 'translateY(101%)' : 'translateY(-101%)';
+    const dur = this.motion ? 600 : 0;
+    const go = (el, from, to) => {
+      let cur = from || getComputedStyle(el).transform; if (!cur || cur === 'none') cur = 'translateY(0)';
+      el.getAnimations().forEach((a) => a.cancel());
+      el.animate([{ transform: cur }, { transform: to }], { duration: dur, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' });
+    };
+    if (on) {
+      go(ov, off, 'translateY(0)'); go(inner, inv, 'translateY(0)');
+      if (this.motion && !track._mq && track.animate) { const w = track.scrollWidth / 2; track._mq = track.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: Math.max(9000, (w / 80) * 1000), iterations: Infinity }); }
+      if (track._mq) track._mq.play();
+    } else { go(ov, null, off); go(inner, null, inv); }
+  }
+  pickProject(i) {
+    if (i === this.state.feat) return;
+    const g = this.projGrid.current, anim = this.motion && g && g.animate;
+    const commit = () => { this.setState({ feat: i }); requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (this._pf) { this._pf.cancel(); this._pf = null; }
+      if (!g) return;
+      if (anim) g.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+      const r = g.getBoundingClientRect();
+      if (r.top < 70) window.scrollBy({ top: r.top - 110, behavior: anim ? 'smooth' : 'auto' });
+    })); };
+    if (!anim) return commit();
+    this._pf = g.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: 150, easing: 'ease-in', fill: 'forwards' });
+    this._pf.onfinish = commit;
+  }
+  mqEnter = (e) => this.mq(e, true);
+  mqLeave = (e) => this.mq(e, false);
+
+  copyEmail = async () => {
+    const email = this.props.email ?? 'gonzalezsebas519@gmail.com';
+    try { await navigator.clipboard.writeText(email); } catch (e) {}
+    this.setState({ copied: true }); clearTimeout(this.cpT); this.cpT = setTimeout(() => this.setState({ copied: false }), 1800);
+  };
+
+  canned(q) {
+    const c = I18N[this.state.lang].canned, s = q.toLowerCase();
+    if (/estudi|study|carrera|semestre|semester/.test(s)) return c.study;
+    if (/tecno|tech|stack|lenguaj|language|herramient|tool/.test(s)) return c.tech;
+    if (/casa/.test(s)) return c.casa;
+    if (/doose|tatu|tattoo/.test(s)) return c.doose;
+    if (/galer|gallery/.test(s)) return c.gal;
+    if (/contact|email|correo|reach|escrib|tel|whats|n[uú]mero|phone/.test(s)) return c.contact;
+    return c.other;
+  }
+  ask = async (q) => {
+    q = (q || '').trim(); if (!q || this.state.busy) return;
+    const T = I18N[this.state.lang];
+    const base = [...(this.state.msgs || [{ r: 'bot', t: T.chatHello }]), { r: 'user', t: q }];
+    this.setState({ msgs: [...base, { r: 'bot', t: T.typing, typing: true }], input: '', busy: true });
+    let answer = '';
+    try {
+      if (window.claude && window.claude.complete) {
+        const history = base.filter((m, i) => !(i === 0 && m.r === 'bot')).map((m) => ({ role: m.r === 'bot' ? 'assistant' : 'user', content: m.t }));
+        answer = await window.claude.complete({
+          system: `Eres el asistente del portfolio de Sebastián González. Responde en el idioma del usuario, en 1–3 frases, tono cercano y profesional, en tercera persona sobre Sebastián. Texto plano sin markdown (sin asteriscos, listas ni títulos), un solo párrafo, máximo 3 frases. Usa solo estos datos y no inventes detalles; si no sabes algo, invita a escribirle desde la sección Contacto. Datos: ${FACTS}`,
+          messages: history, max_tokens: 160,
+        });
+        answer = String(answer || '').replace(/\*\*|__|`/g, '').replace(/^#+\s*/gm, '').replace(/^\s*[-*]\s+/gm, '').replace(/\n{2,}/g, ' ').trim();
+      }
+    } catch (e) { answer = ''; }
+    if (!answer) { await new Promise((r) => setTimeout(r, 650)); answer = this.canned(q); }
+    this.setState({ msgs: [...base, { r: 'bot', t: String(answer).trim() }], busy: false });
+  };
+
+  renderVals() {
+    const s = this.state, t = I18N[s.lang], email = this.props.email ?? 'gonzalezsebas519@gmail.com';
+    const Y = new Date().getFullYear(), key = Y + s.lang + s.gh.stamp;
+    if (!this.ghCache[key]) this.ghCache = { [key]: buildYear(Y, s.lang, s.gh.days) };
+    const gh = this.ghCache[key];
+    const msgs = (s.msgs || [{ r: 'bot', t: t.chatHello }]).map((m) => {
+      const bot = m.r === 'bot';
+      return { t: m.t, as: bot ? 'flex-start' : 'flex-end', bg: bot ? '#FFFFFF' : '#1C1A17', fg: bot ? (m.typing ? '#8E8B83' : '#1C1A17') : '#FAFAF9', bd: bot ? '1px solid #E5E5E3' : '1px solid #1C1A17', rad: bot ? '4px 14px 14px 14px' : '14px 4px 14px 14px' };
+    });
+    return {
+      root: this.root, pre: this.pre, preNum: this.preNum, preBar: this.preBar, isoStage: this.isoStage, isoGroup: this.isoGroup,
+      ghWrap: this.ghWrap, ghTip: this.ghTip, weightBox: this.weightBox, msgBox: this.msgBox,
+      t, email, mailto: 'mailto:' + email, time: s.time, wide: s.wide,
+      esO: s.lang === 'es' ? 1 : 0.35, enO: s.lang === 'en' ? 1 : 0.35,
+      toggleLang: () => this.setState((p) => ({ lang: p.lang === 'es' ? 'en' : 'es', msgs: null })),
+      navItems: t.nav.map((label, i) => ({ label, href: HREFS[i], dot: s.sec === i + 1 ? 1 : 0, mr: s.sec === i + 1 ? '8px' : '0px' })),
+      secNum: '0' + (s.sec + 1), secLabel: t['s' + s.sec], secLabelEl: this.secLabelEl, progRing: this.progRing,
+      archive: (s.gh.archive || ARCHIVE).map((p, i) => {
+        const pi = PROJECTS.findIndex((q) => q.repo.endsWith('/' + p.full));
+        const kind = pi >= 0 ? t.proj[pi].kind : t.other2, img = (pi >= 0 && PROJECTS[pi].img) || '';
+        return { ...p, n: String(i + 1).padStart(2, '0'), kind, url: 'https://github.com/' + p.full, meta: p.lang + ' · ' + p.year, reps: [0, 1, 2, 3, 4, 5, 6, 7].map(() => ({ name: p.name, img, hasImg: !!img, lang: p.lang })) };
+      }),
+      archCount: String((s.gh.archive || ARCHIVE).length).padStart(2, '0'), mqEnter: this.mqEnter, mqLeave: this.mqLeave,
+      secDots: [0, 1, 2, 3, 4, 5, 6].map((i) => ({ bg: i <= s.sec ? '#1C1A17' : '#B4B1A9' })),
+      isoMove: this.isoMove, isoLeave: this.isoLeave,
+      l0: t.layers[0], l1: t.layers[1], l2: t.layers[2], l3: t.layers[3], tiles: TILES,
+      principles: t.pr.map((p, i) => ({ ...p, n: '0' + (i + 1) })),
+      projGrid: this.projGrid,
+      projects: [s.feat, ...PROJECTS.map((_, i) => i).filter((i) => i !== s.feat)].map((i, k) => {
+        const p = PROJECTS[i], feat = k === 0;
+        return { ...p, ...t.proj[i], ...t.cases[i], feat, small: !feat,
+          flex: feat ? '1 1 100%' : '1 1 440px', imgFlex: feat ? '1.5 1 440px' : '1 1 100%',
+          nameSize: feat ? 'clamp(64px,8vw,124px)' : 'clamp(32px,3vw,44px)', titleMt: feat ? 'auto' : '0px', titleGap: feat ? '18px' : '14px', descSize: feat ? '17px' : '15.5px',
+          cursor: feat ? 'default' : 'pointer', tip: feat ? '' : t.cTip,
+          pick: feat ? undefined : (e) => { if (e.target.closest && e.target.closest('a')) return; this.pickProject(i); } };
+      }),
+      ghDot: s.gh.live ? 'oklch(0.62 0.15 150)' : '#8E8B83', ghStatus: s.gh.live ? t.ghLive : t.ghSnap,
+      gh: { ...gh, total: gh.total.toLocaleString(), repos: s.gh.repos }, ghOver: this.ghOver, ghOut: this.ghOut,
+      langs: s.gh.langs.map((l, i) => ({ ...l, c: LANG_C[i] || LANG_C[4] })),
+      log: s.gh.commits.map((e, i) => ({
+        h: e.h, m: e.m, url: `https://github.com/${GH_USER}/${e.repo}/commit/${e.h}`,
+        tag: e.repo + ' · ' + new Date(e.d).toLocaleDateString(s.lang, { day: 'numeric', month: 'short' }),
+        dot: i === 0 ? '#1C1A17' : '#FFFFFF', tagBg: i === 0 ? '#1C1A17' : 'transparent', tagFg: i === 0 ? '#FAFAF9' : '#5C5952',
+      })),
+      startDrag: this.startDrag, toggleMotion: this.toggleMotion,
+      tgBg: s.motionOn ? '#1C1A17' : '#B4B1A9', tgKnob: s.motionOn ? 'translateX(20px)' : 'translateX(0)',
+      enterW: this.enterW, moveW: this.moveW, leaveW: this.leaveW,
+      magMove: this.magMove, magLeave: this.magLeave, clicks: s.clicks, addClick: () => this.setState((p) => ({ clicks: p.clicks + 1 })),
+      copyEmail: this.copyEmail, copyLabel: s.copied ? t.copied : t.copy,
+      dockRef: this.dockRef, dockMove: this.dockMove, dockLeave: this.dockLeave,
+      dockItems: [
+        { label: 'GitHub', value: '@SebastianGonzzalez', href: 'https://github.com/SebastianGonzzalez', target: '_blank', icon: 'icons/github.svg' },
+        { label: 'Email', value: email + ' · ' + (s.copied ? t.copied : t.dockCopy), href: 'mailto:' + email, target: '_self', icon: 'icons/mail.svg', copy: true },
+        { label: 'WhatsApp', value: '+57 305 309 0124', href: 'https://wa.me/573053090124', target: '_blank', icon: 'icons/message-circle.svg' },
+        { label: 'Instagram', value: '@ss.ebas_', href: 'https://www.instagram.com/ss.ebas_/', target: '_blank', icon: 'icons/instagram.svg' },
+      ].map((d, i) => ({ ...d, tipO: s.dockHover === i ? 1 : 0, tipY: s.dockHover === i ? '0px' : '4px',
+        enter: () => this.setState({ dockHover: i }),
+        click: d.copy ? (e) => { e.preventDefault(); this.copyEmail(); } : undefined })),
+      dockCaption: s.dockHover >= 0 ? [ '@SebastianGonzzalez', email + ' · ' + (s.copied ? t.copied : t.dockCopy), '+57 305 309 0124', '@ss.ebas_' ][s.dockHover] : (s.copied ? t.copied : t.dockHint),
+      chatOpen: s.chatOpen, chatHidden: !s.chatOpen, chatBtnLabel: s.chatOpen ? t.close : t.chatBtn,
+      toggleChat: () => this.setState((p) => ({ chatOpen: !p.chatOpen })),
+      chatO: s.chatOpen ? 1 : 0, chatTf: s.chatOpen ? 'translateY(0) scale(1)' : 'translateY(12px) scale(.96)', chatPE: s.chatOpen ? 'auto' : 'none',
+      msgs, showQuick: !s.msgs || s.msgs.length <= 1,
+      quick: t.quick.map((q) => ({ q, ask: () => this.ask(q) })),
+      input: s.input, setInput: (e) => this.setState({ input: e.target.value }),
+      sendInput: (e) => { e.preventDefault(); this.ask(this.state.input); },
+    };
+  }
+}
+</script>
+</body>
+</html>
