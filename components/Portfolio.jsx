@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import TechText from './TechText';
 import {
-  PROJECTS, HREFS, NAMES, COLLAB, ARCHIVE, prettyRepo, TILES, LANG_C, SNAP, I18N, GH_USER, EMAIL, buildYear,
+  PROJECTS, HREFS, NAMES, COLLAB, ARCHIVE, prettyRepo, TILES, LANG_C, SNAP, I18N, GH_USER, EMAIL, buildYear, BASE,
 } from '@/lib/data';
 
 // Inline CSS text → React style object (cached). Keeps the design's inline styles verbatim.
@@ -486,10 +486,10 @@ export default class Portfolio extends React.Component {
         nameSize: feat ? 'clamp(64px,8vw,124px)' : 'clamp(32px,3vw,44px)', titleMt: feat ? 'auto' : '0px', titleGap: feat ? '18px' : '14px', descSize: feat ? '17px' : '15.5px' };
     });
     const dockItems = [
-      { label: 'GitHub', value: '@SebastianGonzzalez', href: 'https://github.com/SebastianGonzzalez', target: '_blank', icon: 'icons/github.svg' },
-      { label: 'Email', value: email + ' · ' + (s.copied ? t.copied : t.dockCopy), href: 'mailto:' + email, target: '_self', icon: 'icons/mail.svg', copy: true },
-      { label: 'WhatsApp', value: '+57 305 309 0124', href: 'https://wa.me/573053090124', target: '_blank', icon: 'icons/message-circle.svg' },
-      { label: 'Instagram', value: '@ss.ebas_', href: 'https://www.instagram.com/ss.ebas_/', target: '_blank', icon: 'icons/instagram.svg' },
+      { label: 'GitHub', value: '@SebastianGonzzalez', href: 'https://github.com/SebastianGonzzalez', target: '_blank', icon: BASE + '/icons/github.svg' },
+      { label: 'Email', value: email + ' · ' + (s.copied ? t.copied : t.dockCopy), href: 'mailto:' + email, target: '_self', icon: BASE + '/icons/mail.svg', copy: true },
+      { label: 'WhatsApp', value: '+57 305 309 0124', href: 'https://wa.me/573053090124', target: '_blank', icon: BASE + '/icons/message-circle.svg' },
+      { label: 'Instagram', value: '@ss.ebas_', href: 'https://www.instagram.com/ss.ebas_/', target: '_blank', icon: BASE + '/icons/instagram.svg' },
     ];
     const dockCaption = s.dockHover >= 0 ? dockItems[s.dockHover].value : (s.copied ? t.copied : t.dockHint);
     const fmtDay = (d) => (s.mounted ? new Date(d).toLocaleDateString(s.lang, { day: 'numeric', month: 'short' }) : '');
