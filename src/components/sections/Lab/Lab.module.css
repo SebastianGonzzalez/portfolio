@@ -1,0 +1,64 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: clamp(36px, 4vw, 56px);
+}
+
+.title {
+  max-width: 680px;
+}
+
+.experiments {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--color-rule);
+  border-left: 1px dashed var(--color-rule);
+}
+
+.experiment {
+  min-height: 440px;
+  border-right: 1px dashed var(--color-rule);
+  border-bottom: 1px dashed var(--color-rule);
+  display: flex;
+  flex-direction: column;
+}
+
+.wide {
+  flex: 2 1 520px;
+}
+
+.narrow {
+  flex: 1 1 300px;
+}
+
+.dark {
+  background: var(--color-ink);
+  color: var(--color-paper-warm);
+}
+
+.experimentHead {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.dark .experimentHead {
+  color: var(--color-on-dark-meta);
+}
+
+.note {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.dark .note {
+  color: var(--color-on-dark-body);
+}
+
+@media (max-width: 640px) {
+  .narrow {
+    min-height: 0;
+  }
+}

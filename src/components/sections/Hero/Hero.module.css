@@ -1,0 +1,158 @@
+.hero {
+  position: relative;
+  background: var(--color-paper);
+  padding: clamp(120px, 16vh, 168px) var(--page-gutter) clamp(64px, 8vw, 104px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(32px, 4vw, 56px);
+  align-items: center;
+}
+
+.intro {
+  flex: 1 1 440px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Avatar, name and links */
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  filter: grayscale(1);
+  border: 1px solid rgba(28, 26, 23, 0.12);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-meta);
+}
+
+.link:hover {
+  color: var(--color-ink);
+}
+
+/* Headline */
+
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(50px, 6.2vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.emphasis {
+  font-weight: 400;
+}
+
+.lead {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 540px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  margin: 0 2px;
+  border: 1px dashed var(--color-chip-border);
+  border-radius: 6px;
+  background: var(--color-surface-chip);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-ink);
+  line-height: 24px;
+}
+
+.chipMark {
+  font-weight: 500;
+  /* Monochrome symbol fonts for marks like the atom, so no platform swaps in a colour emoji. */
+  font-family: var(--font-mono), 'Segoe UI Symbol', 'Apple Symbols', 'Noto Sans Symbols 2', sans-serif;
+}
+
+/* 3D stack stage */
+
+.stage {
+  flex: 1.15 1 480px;
+  position: relative;
+  height: clamp(460px, 48vw, 620px);
+  perspective: 1800px;
+  min-width: 0;
+}
+
+.stageCaption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-meta);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.hint {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.hintRule {
+  width: 24px;
+  border-top: 1px dashed var(--color-rule-strong);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 40px;
+  }
+  .stage {
+    height: 440px;
+  }
+}

@@ -1,0 +1,52 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: min(320px, 80vw);
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  letter-spacing: -0.02em;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-meta);
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  border-top: 1px dashed var(--color-rule);
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}

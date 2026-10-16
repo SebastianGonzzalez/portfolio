@@ -1,4 +1,29 @@
+# Dependencias
 node_modules
+
+# Builds y caches generados
 .next
 out
+*.tsbuildinfo
+next-env.d.ts
+
+# Resultados de pruebas
+coverage
+test-results
+playwright-report
+blob-report
+
+# Variables de entorno y credenciales
+.env*
+*.pem
+
+# Logs
+*.log
+
+# Herramientas locales, editor y sistema operativo
 .impeccable
+.vercel
+.vscode
+.idea
+.DS_Store
+Thumbs.db

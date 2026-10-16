@@ -1,0 +1,36 @@
+/* Shared text styles. Layered, so a component class can override any property. */
+@layer ui {
+  /* Small uppercase mono line above a heading. */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-meta);
+  }
+
+  /* Uppercase mono metadata. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-meta);
+  }
+
+  /* For kickers and labels on dark panels. */
+  .onDark {
+    color: var(--color-on-dark-meta);
+  }
+
+  /* Section title. */
+  .title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(44px, 5.4vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+}

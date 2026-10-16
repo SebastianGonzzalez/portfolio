@@ -1,0 +1,33 @@
+.corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+}
+
+.tl {
+  left: -1px;
+  top: -1px;
+  border-left: 1.5px solid var(--color-ink);
+  border-top: 1.5px solid var(--color-ink);
+}
+
+.tr {
+  right: -1px;
+  top: -1px;
+  border-right: 1.5px solid var(--color-ink);
+  border-top: 1.5px solid var(--color-ink);
+}
+
+.bl {
+  left: -1px;
+  bottom: -1px;
+  border-left: 1.5px solid var(--color-ink);
+  border-bottom: 1.5px solid var(--color-ink);
+}
+
+.br {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1.5px solid var(--color-ink);
+  border-bottom: 1.5px solid var(--color-ink);
+}

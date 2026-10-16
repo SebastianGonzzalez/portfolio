@@ -1,0 +1,165 @@
+.group {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 520px;
+  height: 576px;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) rotateX(14deg) rotateY(-26deg) rotateZ(-7deg);
+  transition: transform 700ms var(--ease-out);
+}
+
+.slab {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 700ms var(--ease-out);
+}
+
+/* Dashed outline 28px behind each slab, for depth. */
+.shadow {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--color-rule-faint);
+  transform: translateZ(-28px);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--color-rule-strong);
+  background: rgba(244, 244, 242, 0.72);
+  transition: background 240ms ease-out;
+}
+
+.face:hover {
+  background: rgba(250, 250, 249, 0.95);
+}
+
+/* Text layers */
+
+.layerFace {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.layerTitle {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.layerText {
+  font-size: 12.5px;
+  color: var(--color-meta);
+}
+
+.layerFaceLarge {
+  padding: 22px 26px;
+}
+
+.layerFaceLarge .layerTitle {
+  font-size: 28px;
+}
+
+.layerFaceLarge .layerText {
+  font-size: 13px;
+}
+
+/* Skills */
+
+.skillsFace {
+  padding: 14px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  gap: 12px 20px;
+  transform-style: preserve-3d;
+}
+
+.skillGroup {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transform-style: preserve-3d;
+}
+
+.skillGroupMain {
+  flex: 1 1 100%;
+}
+
+.skillLabel {
+  font-size: 9.5px;
+  white-space: nowrap;
+}
+
+.skillRow {
+  display: flex;
+  gap: 6px;
+  transform-style: preserve-3d;
+}
+
+.skill {
+  flex: 1 1 auto;
+  height: 28px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--color-chip-border);
+  background: rgba(250, 250, 249, 0.9);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition:
+    transform 420ms var(--ease-out),
+    background-color 240ms ease-out,
+    border-color 240ms ease-out,
+    box-shadow 420ms var(--ease-out);
+}
+
+.skill:hover {
+  background: var(--color-paper);
+  border-color: var(--color-ink);
+  transform: translateZ(12px);
+  box-shadow: 0 10px 20px -12px rgba(28, 26, 23, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill:hover {
+    transform: none;
+  }
+}
+
+/* Monogram badge */
+
+.badgeFace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.badgeFace:hover {
+  background: rgba(244, 244, 242, 0.72);
+}
+
+.badgeMark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.badgeVersion {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-meta);
+}

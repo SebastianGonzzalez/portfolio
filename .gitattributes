@@ -1,0 +1,4 @@
+# LF everywhere, so Prettier and the CI see the same line endings as every contributor.
+* text=auto eol=lf
+*.png binary
+*.svg text eol=lf

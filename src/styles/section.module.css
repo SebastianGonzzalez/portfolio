@@ -1,0 +1,25 @@
+/* A stacked page section: white sheet with a shadow above, so it reads as sliding over the previous one. */
+@layer ui {
+  .section {
+    position: relative;
+    background: var(--color-paper);
+    box-shadow: 0 -28px 56px -28px rgba(28, 26, 23, 0.22);
+    padding: clamp(88px, 11vw, 140px) var(--page-gutter) clamp(72px, 10vw, 128px);
+  }
+
+  /* Kicker + title row on top of a section. */
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: clamp(36px, 4vw, 56px);
+  }
+
+  .headText {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
