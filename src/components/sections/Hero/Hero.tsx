@@ -64,7 +64,7 @@ export function Hero({ t }: { t: Dictionary['hero'] }) {
         </h1>
         <p data-intro="" className={styles.lead}>
           {t.introBefore}
-          <Chip mark="TS">TypeScript</Chip>, <Chip mark="⚛">React</Chip>
+          <Chip mark="TS">TypeScript</Chip>, <Chip mark={'⚛\uFE0E'}>React</Chip>
           {t.introAnd}
           <Chip mark="N">Next.js</Chip>
           {t.introAfter}
@@ -90,6 +90,7 @@ export function Hero({ t }: { t: Dictionary['hero'] }) {
   );
 }
 
+/** Inline tech chip. Symbols that have an emoji form get \uFE0E, or Safari draws a colour emoji. */
 function Chip({ mark, children }: { mark: string; children: string }) {
   return (
     <span className={styles.chip} translate="no">

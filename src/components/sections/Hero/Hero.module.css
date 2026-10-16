@@ -101,6 +101,8 @@
 
 .chipMark {
   font-weight: 500;
+  /* Monochrome symbol fonts for marks like the atom, so no platform swaps in a colour emoji. */
+  font-family: var(--font-mono), 'Segoe UI Symbol', 'Apple Symbols', 'Noto Sans Symbols 2', sans-serif;
 }
 
 /* 3D stack stage */
