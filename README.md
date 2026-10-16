@@ -79,7 +79,7 @@ Una capa solo importa de las anteriores. ESLint (`import/no-restricted-paths`) l
 ## Pruebas
 
 - **Unitarias** (`*.test.ts(x)` junto a cada módulo): lógica, hooks y componentes.
-- **E2E** (`tests/e2e/`), contra el build estático, sin red y con fecha fija para que sean deterministas:
+- **E2E** (`tests/e2e/`) en Chromium, Firefox y WebKit (Safari de escritorio e iPhone), contra el build estático, sin red y con fecha fija para que sean deterministas:
   - `site.spec.ts`: idiomas, navegación, 404, modo sin conexión, preloader.
   - `a11y.spec.ts`: axe con WCAG 2.2 AA en ambos idiomas.
   - `visual.spec.ts`: compara la página completa píxel a píxel con capturas de referencia (escritorio y móvil). Las capturas dependen del sistema operativo, así que la CI no las compara.
