@@ -18,6 +18,7 @@ export interface CalendarYear {
   cells: CalendarCell[];
   /** Month label and the 1-based week column where it starts. */
   months: { label: string; column: number }[];
+  year: number;
   total: number;
   longestStreak: number;
   activeDays: number;
@@ -40,6 +41,12 @@ interface Options {
 
 export const isoDay = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+/** Local midnight of a "YYYY-MM-DD" day: the same calendar day in every timezone, unlike `new Date(iso)`. */
+export function fromIsoDay(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
 
 function tipFor(count: number, date: string, labels: Labels) {
   if (!count) return `${labels.contributionNone} · ${date}`;
@@ -82,7 +89,7 @@ export function buildYear(options: Options): CalendarYear {
     const dayOfYear = Math.round((new Date(year, m, 1).getTime() - jan1.getTime()) / 864e5);
     return { label, column: Math.floor((dayOfYear + offset) / 7) + 1 };
   });
-  return { cells, months, total, longestStreak, activeDays };
+  return { cells, months, year, total, longestStreak, activeDays };
 }
 
 /** Week column (0-based) that contains `date`, for scrolling the calendar to today. */

@@ -113,12 +113,12 @@ describe('Preloader', () => {
       </>,
     );
 
-  it('counts to 100, fades out and starts the intro, once per session', () => {
+  it('counts to 100, fades out in under a second and starts the intro, once per session', () => {
     const first = mount();
     const overlay = first.container.querySelector<HTMLElement>('.preloader')!;
-    advance(600);
+    advance(200);
     expect(Number(overlay.textContent!.match(/\d{3}/)![0])).toBeGreaterThan(0);
-    advance(1400);
+    advance(700);
     expect(overlay.textContent).toContain('100');
     expect(overlay.style.display).toBe('none');
     expect(introPlayed).toBeGreaterThan(0);
@@ -154,7 +154,7 @@ describe('Preloader', () => {
 
   it('stops its timers on unmount', () => {
     const { unmount } = mount();
-    advance(1250);
+    advance(470); // the count is done, the intro not yet started
     unmount();
     advance(1000);
     expect(introPlayed).toBe(0);

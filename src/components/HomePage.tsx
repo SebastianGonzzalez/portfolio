@@ -12,6 +12,7 @@ import { GitHubActivity } from '@/components/sections/GitHubActivity/GitHubActiv
 import { Hero } from '@/components/sections/Hero/Hero';
 import { Lab } from '@/components/sections/Lab/Lab';
 import { Work } from '@/components/sections/Work/Work';
+import { isoDay } from '@/lib/calendar';
 import { englishOrdinal, fill, semesterOf } from '@/lib/format';
 import { AppProviders } from '@/providers';
 import styles from './HomePage.module.css';
@@ -42,7 +43,7 @@ export function HomePage({ lang }: { lang: Lang }) {
           <Hero t={hero} />
           <Approach t={t.approach} label={labels.approach} />
           <Work lang={lang} t={t.work} label={labels.work} />
-          <GitHubActivity lang={lang} t={t.github} label={labels.github} />
+          <GitHubActivity lang={lang} t={t.github} label={labels.github} builtOn={isoDay(now)} />
           <Lab t={t.lab} label={labels.lab} />
           <Archive lang={lang} t={t.archive} label={labels.archive} />
           <Contact t={contact} label={labels.contact} />

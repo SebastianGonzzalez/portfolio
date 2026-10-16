@@ -1,5 +1,7 @@
+/* Equal columns, as many as fit (3 on desktop, 2 on tablets, 1 on phones), so a project left alone on the
+   last row keeps the size of the others instead of stretching. The featured project spans the full row. */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 20px;
 }

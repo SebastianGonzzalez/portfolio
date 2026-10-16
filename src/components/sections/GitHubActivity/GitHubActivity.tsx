@@ -16,15 +16,23 @@ import { CommitLog } from './CommitLog';
 import { LanguageBreakdown } from './LanguageBreakdown';
 import styles from './GitHubActivity.module.css';
 
-export function GitHubActivity({ lang, t, label }: { lang: Lang; t: Dictionary['github']; label: string }) {
+interface GitHubActivityProps {
+  lang: Lang;
+  t: Dictionary['github'];
+  label: string;
+  /** Build day, "YYYY-MM-DD": the static HTML shows the calendar as of this day. */
+  builtOn: string;
+}
+
+export function GitHubActivity({ lang, t, label, builtOn }: GitHubActivityProps) {
   const activity = useGitHubActivity();
   const isClient = useIsClient();
-  const year = useCalendarYear(lang, t);
+  const year = useCalendarYear(lang, t, builtOn);
 
   const stats = [
-    { label: t.total, value: year ? year.total.toLocaleString(lang) : '—' },
-    { label: t.streak, value: year ? year.longestStreak : '—', unit: t.days },
-    { label: t.active, value: year ? year.activeDays : '—', unit: t.days },
+    { label: t.total, value: year.total.toLocaleString(lang) },
+    { label: t.streak, value: year.longestStreak, unit: t.days },
+    { label: t.active, value: year.activeDays, unit: t.days },
     { label: t.repos, value: activity.repoCount },
   ];
 

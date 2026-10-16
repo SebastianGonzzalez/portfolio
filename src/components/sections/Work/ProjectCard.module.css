@@ -1,6 +1,5 @@
 .card {
   position: relative;
-  flex: 1 1 440px;
   min-width: 0;
   border: 1px dashed var(--color-rule);
   padding: 14px;
@@ -20,7 +19,7 @@
 }
 
 .featured {
-  flex-basis: 100%;
+  grid-column: 1 / -1;
   cursor: default;
 }
 
@@ -187,14 +186,26 @@
   opacity: 0.6;
 }
 
-/* "View case": its ::after stretches over the whole card, so the card is clickable; links stay above it. */
+/* "Read the case": its ::after stretches over the whole card, so the card is clickable; links stay above it.
+   Drawn as a button, and filled while the card is hovered, so it reads as the card's main action. */
 .pick {
   letter-spacing: 0.1em;
-  line-height: inherit;
-  padding: 0;
-  border: 0;
+  line-height: 1;
+  padding: 9px 14px;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
   background: transparent;
+  color: var(--color-ink);
   cursor: pointer;
+  transition:
+    background 200ms ease-out,
+    color 200ms ease-out;
+}
+
+.card:hover .pick,
+.pick:focus-visible {
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .pick::after {

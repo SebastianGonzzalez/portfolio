@@ -7,7 +7,9 @@ import { useMotion } from '@/providers/MotionProvider';
 import styles from './Preloader.module.css';
 
 const SEEN_KEY = 'sg3-intro';
-const DURATION = 1200;
+// Short on purpose: it greets the visitor, it doesn't make them wait.
+const DURATION = 450;
+const FADE = 350;
 
 function seenThisSession() {
   try {
@@ -61,12 +63,12 @@ export function Preloader({ loading }: { loading: string }) {
         raf = requestAnimationFrame(step);
         return;
       }
-      el.style.transition = 'opacity 600ms ease-out, filter 600ms ease-out';
+      el.style.transition = `opacity ${FADE}ms ease-out, filter ${FADE}ms ease-out`;
       el.style.opacity = '0';
       el.style.filter = 'blur(8px)';
       timers.push(
-        setTimeout(() => intro.emit(), 120),
-        setTimeout(hide, 620),
+        setTimeout(() => intro.emit(), 60),
+        setTimeout(hide, FADE + 20),
       );
     };
     raf = requestAnimationFrame(step);

@@ -20,7 +20,7 @@ export const doose: Project = {
       imageAlt: 'Captura — Doose',
       case: {
         problem:
-          'Un estudio de tatuajes necesitaba presentar sus estilos y su trabajo, y atraer clientes desde la web.',
+          'Construir en equipo la web de un estudio de tatuajes, con estilos, trabajos y artistas, y con front-end y back-end en un mismo repositorio.',
         role: 'Trabajo en equipo con Duan Gómez: maquetación del front-end y sistema de estilos en SCSS.',
         built: [
           'Sitio con secciones de estilos, galería de trabajos y artistas',
@@ -39,7 +39,8 @@ export const doose: Project = {
       description: 'Site for a tattoo studio, built together with Duan Gómez.',
       imageAlt: 'Screenshot — Doose',
       case: {
-        problem: 'A tattoo studio needed to present its styles and work, and attract clients from the web.',
+        problem:
+          'Build, as a team, the website of a tattoo studio, with its styles, work and artists, and with front end and back end in one repository.',
         role: 'Team project with Duan Gómez: front-end layout and the SCSS styling system.',
         built: [
           'Site with sections for styles, portfolio and artists',

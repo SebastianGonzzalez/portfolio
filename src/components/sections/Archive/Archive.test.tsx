@@ -9,7 +9,17 @@ import { toRows } from './archiveRows';
 
 describe('toRows', () => {
   it('numbers rows and enriches known projects with their kind and preview', () => {
-    const [galeria, , doose] = toRows(GITHUB_SNAPSHOT.archive, 'es', es.archive.repository);
+    const entries = [
+      {
+        repo: 'SebastianGonzzalez/galeria-visual',
+        name: 'Galería visual',
+        language: 'TypeScript',
+        year: '2026',
+      },
+      { repo: 'someone/else', name: 'Else', language: 'Go', year: '2025' },
+      { repo: 'DuanGomez/Doose', name: 'Doose', language: 'SCSS', year: '2026' },
+    ];
+    const [galeria, , doose] = toRows(entries, 'es', es.archive.repository);
     expect(galeria).toMatchObject({ number: '01', kind: 'Experimento', language: 'TypeScript' });
     expect(galeria.preview).toContain('url(/assets/galeria-visual.png)');
     expect(galeria.preview).toContain('opengraph.githubassets.com');
@@ -34,7 +44,8 @@ describe('Archive', () => {
 
   it('lists every repository with a count', () => {
     renderWithProviders(<Archive lang="es" t={es.archive} label={es.sections.archive} />);
-    expect(screen.getByText(`03 ${es.archive.count}`)).toBeTruthy();
+    const count = String(GITHUB_SNAPSHOT.archive.length).padStart(2, '0');
+    expect(screen.getByText(`${count} ${es.archive.count}`)).toBeTruthy();
     const links = screen.getAllByRole('link').filter((a) => a.classList.contains('row'));
     expect(links.map((a) => a.getAttribute('href'))).toEqual(
       GITHUB_SNAPSHOT.archive.map((a) => `https://github.com/${a.repo}`),

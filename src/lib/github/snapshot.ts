@@ -1,11 +1,12 @@
 import type { GitHubActivity } from './types';
 
-/** Last saved read of the GitHub profile. Shown until (or unless) the live data loads. */
+/** Last saved read of the GitHub profile (npm run snapshot). Shown until (or unless) the live data loads. */
 export const GITHUB_SNAPSHOT: GitHubActivity = {
   live: false,
   loadedAt: 0,
-  repoCount: 2,
+  repoCount: 3,
   archive: [
+    { repo: 'SebastianGonzzalez/portfolio', name: 'Portfolio', language: 'TypeScript', year: '2026' },
     {
       repo: 'SebastianGonzzalez/galeria-visual',
       name: 'Galería visual',
@@ -22,34 +23,52 @@ export const GITHUB_SNAPSHOT: GitHubActivity = {
     '2026-09-25': { count: 3, level: 3 },
     '2026-09-26': { count: 4, level: 4 },
     '2026-10-05': { count: 4, level: 4 },
+    '2026-10-07': { count: 2, level: 2 },
+    '2026-10-08': { count: 1, level: 1 },
+    '2026-10-15': { count: 18, level: 4 },
   },
   languages: [
-    { name: 'JavaScript', percent: 37 },
-    { name: 'TypeScript', percent: 25 },
-    { name: 'CSS', percent: 25 },
-    { name: 'HTML', percent: 13 },
+    { name: 'TypeScript', percent: 63 },
+    { name: 'CSS', percent: 18 },
+    { name: 'JavaScript', percent: 14 },
+    { name: 'HTML', percent: 5 },
   ],
   commits: [
     {
-      hash: 'c0b694e',
-      message: 'Remove duplicate features from README',
-      repo: 'galeria-visual',
-      date: '2026-10-06T04:08:27Z',
+      hash: '5819c63',
+      message: 'Merge pull request #3 from SebastianGonzzalez/docs/readme',
+      repo: 'portfolio',
+      date: '2026-10-16T02:09:42Z',
     },
     {
-      hash: '077d823',
-      message: 'Revise README for clarity and additional details',
-      repo: 'galeria-visual',
-      date: '2026-10-06T04:07:23Z',
+      hash: '0b15e7f',
+      message: 'Sacar del repositorio los archivos del diseño original',
+      repo: 'portfolio',
+      date: '2026-10-16T02:03:49Z',
     },
-    { hash: 'fff7a3d', message: 'cambios finales', repo: 'Casa_Nua', date: '2026-10-06T03:50:23Z' },
-    { hash: '7fa3162', message: 'Update README.md', repo: 'galeria-visual', date: '2026-09-26T07:11:58Z' },
-    { hash: 'f17727b', message: 'Update README.md', repo: 'galeria-visual', date: '2026-09-26T07:07:05Z' },
     {
-      hash: '7961df8',
-      message: 'Preparar galeria para GitHub Pages',
-      repo: 'galeria-visual',
-      date: '2026-09-26T06:41:48Z',
+      hash: '943c5d5',
+      message: 'Quitar la mención a la herramienta de diseño del README',
+      repo: 'portfolio',
+      date: '2026-10-16T02:01:14Z',
+    },
+    {
+      hash: '1624dbe',
+      message: 'Merge pull request #2 from SebastianGonzzalez/chore/licencia',
+      repo: 'portfolio',
+      date: '2026-10-16T01:44:58Z',
+    },
+    {
+      hash: '7d8d946',
+      message: 'Añadir licencia: código MIT y contenido personal reservado',
+      repo: 'portfolio',
+      date: '2026-10-16T01:38:59Z',
+    },
+    {
+      hash: 'd84ed0e',
+      message: 'Merge pull request #1 from SebastianGonzzalez/refactor/architecture',
+      repo: 'portfolio',
+      date: '2026-10-16T01:10:01Z',
     },
   ],
 };

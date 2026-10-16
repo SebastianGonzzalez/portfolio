@@ -1,3 +1,4 @@
+import { GITHUB_SNAPSHOT } from '../../src/lib/github/snapshot';
 import { expect, test } from './fixtures';
 
 test.describe('languages', () => {
@@ -44,7 +45,7 @@ test.describe('page', () => {
   test('works offline with the bundled GitHub snapshot', async ({ open }) => {
     const page = await open('es');
     await expect(page.getByText(/última lectura/)).toBeVisible();
-    await expect(page.getByText('Remove duplicate features from README')).toBeAttached();
+    await expect(page.getByText(GITHUB_SNAPSHOT.commits[0].message)).toBeAttached();
   });
 
   test('the contribution calendar can be reached from the keyboard', async ({ open }) => {
@@ -88,7 +89,7 @@ test.describe('shareable state', () => {
   test('featuring a case updates the URL', async ({ open }) => {
     const page = await open('es');
     // Keyboard activation: Playwright's scroll-into-view would park the button under the next stacked section.
-    await page.getByRole('button', { name: 'Ver caso: Galería visual' }).focus();
+    await page.getByRole('button', { name: 'Leer el caso: Galería visual' }).focus();
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(/\?caso=galeria-visual$/);
   });
