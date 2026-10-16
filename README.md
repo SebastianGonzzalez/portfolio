@@ -25,6 +25,7 @@ npm run check   # todo lo que corre la CI: lint, tipos, formato, tests, build y 
 | `npm run test:e2e`        | Playwright contra el build: funcional, accesibilidad y visual      |
 | `npm run test:e2e:update` | Regenera las capturas de referencia tras un cambio visual aprobado |
 | `npm run og`              | Regenera las imágenes de vista previa al compartir (`public/og/`)  |
+| `npm run snapshot`        | Actualiza la lectura guardada de GitHub con datos reales           |
 
 ## Arquitectura
 
@@ -63,7 +64,7 @@ Una capa solo importa de las anteriores. ESLint (`import/no-restricted-paths`) l
 - **Casos compartibles.** El proyecto destacado vive en la URL (`?caso=doose`): un enlace así abre la página directamente en ese caso.
 - **Sugerencia de idioma, sin redirigir.** Si el idioma del navegador no es el de la página, aparece un aviso discreto, escrito en ese idioma. Seguirlo o cerrarlo se recuerda. No hay redirección automática: en un sitio estático solo puede ocurrir después de cargar, y produce un parpadeo.
 - **Todo funciona con teclado**, incluidas las piezas del Laboratorio: con foco, se mueven con las flechas (Mayús para pasos largos).
-- **GitHub nunca rompe la página.** Se muestra una lectura guardada (`lib/github/snapshot.ts`) y se reemplaza con datos en vivo si la API responde.
+- **GitHub nunca rompe la página.** Se muestra una lectura guardada (`lib/github/snapshot.ts`, actualizable con `npm run snapshot`) y se reemplaza con datos en vivo si la API responde. El HTML estático ya trae las cifras, calculadas al día del build, así que nunca aparecen vacías.
 - **CSS Modules + cascade layers.** `reset` < `ui` < estilos del componente: el módulo de cada componente siempre gana, sin `!important`.
 
 ## Cambios frecuentes

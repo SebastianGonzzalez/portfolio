@@ -1,12 +1,17 @@
 import { fireEvent, screen, within } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { es } from '@/content/i18n/es';
+import { buildYear, fromIsoDay } from '@/lib/calendar';
 import { GITHUB_SNAPSHOT } from '@/lib/github/snapshot';
+import { AppProviders } from '@/providers';
 import { offline, prefersReducedMotion, renderWithProviders } from '@/test/utils';
 import { GitHubActivity } from './GitHubActivity';
 
 const t = es.github;
-const mount = () => renderWithProviders(<GitHubActivity lang="es" t={t} label={es.sections.github} />);
+const BUILT_ON = '2026-10-15';
+const section = <GitHubActivity lang="es" t={t} label={es.sections.github} builtOn={BUILT_ON} />;
+const mount = () => renderWithProviders(section);
 
 const repo = (name: string, fork = false) => ({
   name,
@@ -49,6 +54,29 @@ describe('GitHubActivity', () => {
     expect(screen.getByText(new RegExp(t.snapshot))).toBeTruthy();
     expect(screen.getByText(GITHUB_SNAPSHOT.commits[0].message)).toBeTruthy();
     expect(screen.getByText(t.repos).nextSibling!.textContent).toBe(String(GITHUB_SNAPSHOT.repoCount));
+  });
+
+  it('puts the totals in the static HTML, counted up to the build day', () => {
+    const html = renderToString(<AppProviders>{section}</AppProviders>);
+    const expected = buildYear({
+      year: 2026,
+      days: GITHUB_SNAPSHOT.days,
+      today: fromIsoDay(BUILT_ON),
+      locale: 'es',
+      labels: t,
+    });
+    expect(expected.total).toBeGreaterThan(0);
+    expect(html).not.toContain('—');
+    const values = [...html.matchAll(/class="statValue">([\d.,]+)/g)].map((m) => m[1]);
+    expect(values).toEqual(
+      [
+        expected.total.toLocaleString('es'),
+        expected.longestStreak,
+        expected.activeDays,
+        GITHUB_SNAPSHOT.repoCount,
+      ].map(String),
+    );
+    expect(html).toContain(`${expected.total} Contribuciones · 2026`);
   });
 
   it('replaces the snapshot with live repos, languages and commits', async () => {

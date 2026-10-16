@@ -2,25 +2,27 @@
 import { useEffect, useMemo, useRef, type PointerEvent } from 'react';
 import type { Dictionary, Lang } from '@/content/i18n';
 import { useIsClient } from '@/hooks/useClientValue';
-import { LEVEL_COLORS, buildYear, weekColumn, type CalendarYear } from '@/lib/calendar';
+import { LEVEL_COLORS, buildYear, fromIsoDay, weekColumn, type CalendarYear } from '@/lib/calendar';
 import { useGitHubActivity } from '@/providers/GitHubProvider';
 import styles from './ContributionCalendar.module.css';
 
 const CELL = 11;
 const STEP = CELL + 3;
 
-/** This year's calendar. Null on the server: it depends on "today" and the visitor's timezone. */
-export function useCalendarYear(lang: Lang, t: Dictionary['github']): CalendarYear | null {
+/**
+ * This year's calendar. The static HTML is built as of `builtOn` ("YYYY-MM-DD"), so it already shows the
+ * numbers; after hydration it moves to the visitor's own "today".
+ */
+export function useCalendarYear(lang: Lang, t: Dictionary['github'], builtOn: string): CalendarYear {
   const { days } = useGitHubActivity();
   const isClient = useIsClient();
   return useMemo(() => {
-    if (!isClient) return null;
-    const today = new Date();
+    const today = isClient ? new Date() : fromIsoDay(builtOn);
     return buildYear({ year: today.getFullYear(), days, today, locale: lang, labels: t });
-  }, [isClient, days, lang, t]);
+  }, [isClient, days, lang, t, builtOn]);
 }
 
-export function ContributionCalendar({ year, t }: { year: CalendarYear | null; t: Dictionary['github'] }) {
+export function ContributionCalendar({ year, t }: { year: CalendarYear; t: Dictionary['github'] }) {
   const { loadedAt } = useGitHubActivity();
   const scroller = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
@@ -30,7 +32,7 @@ export function ContributionCalendar({ year, t }: { year: CalendarYear | null; t
   const scrolledFor = useRef<number | null>(null);
   useEffect(() => {
     const el = scroller.current;
-    if (!el || !year || scrolledFor.current === loadedAt || el.scrollWidth <= el.clientWidth) return;
+    if (!el || scrolledFor.current === loadedAt || el.scrollWidth <= el.clientWidth) return;
     scrolledFor.current = loadedAt;
     el.scrollLeft = Math.max(0, weekColumn(new Date()) * STEP - el.clientWidth + STEP * 6);
   }, [year, loadedAt]);
@@ -64,7 +66,7 @@ export function ContributionCalendar({ year, t }: { year: CalendarYear | null; t
       <div ref={scroller} tabIndex={0} role="region" aria-label={t.kicker} className={styles.scroller}>
         <div ref={wrap} className={styles.wrap}>
           <div className={styles.months}>
-            {year?.months.map((m) => (
+            {year.months.map((m) => (
               <span key={m.label} className={styles.month} style={{ gridColumn: m.column }}>
                 {m.label}
               </span>
@@ -72,12 +74,12 @@ export function ContributionCalendar({ year, t }: { year: CalendarYear | null; t
           </div>
           <div
             role="img"
-            aria-label={year ? `${year.total} ${t.total} · ${new Date().getFullYear()}` : t.total}
+            aria-label={`${year.total} ${t.total} · ${year.year}`}
             onPointerOver={showTip}
             onPointerLeave={hideTip}
             className={styles.grid}
           >
-            {year?.cells.map((c, i) => (
+            {year.cells.map((c, i) => (
               <span
                 // Fixed 371-cell grid: the position is the identity.
                 key={i}
