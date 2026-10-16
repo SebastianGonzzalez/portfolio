@@ -120,3 +120,25 @@ test.describe('language suggestion', () => {
     await expect(page.getByRole('complementary')).toHaveCount(0);
   });
 });
+
+test.describe('sharing and indexing', () => {
+  test('each language has its own preview image, and it is served', async ({ open, request }) => {
+    for (const lang of ['es', 'en'] as const) {
+      const page = await open(lang);
+      const url = await page.locator('meta[property="og:image"]').getAttribute('content');
+      expect(url).toBe(`https://sebastiangonzzalez.github.io/portfolio/og/${lang}.png`);
+      await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+        'content',
+        'summary_large_image',
+      );
+      const image = await request.get(`./og/${lang}.png`);
+      expect(image.headers()['content-type']).toBe('image/png');
+    }
+  });
+
+  test('the sitemap lists both languages', async ({ request }) => {
+    const sitemap = await (await request.get('./sitemap.xml')).text();
+    expect(sitemap).toContain('<loc>https://sebastiangonzzalez.github.io/portfolio/</loc>');
+    expect(sitemap).toContain('<loc>https://sebastiangonzzalez.github.io/portfolio/en/</loc>');
+  });
+});

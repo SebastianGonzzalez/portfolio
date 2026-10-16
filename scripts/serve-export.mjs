@@ -13,6 +13,7 @@ const TYPES = {
   '.css': 'text/css',
   '.json': 'application/json',
   '.svg': 'image/svg+xml',
+  '.xml': 'application/xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.ico': 'image/x-icon',

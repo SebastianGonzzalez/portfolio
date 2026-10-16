@@ -24,6 +24,7 @@ npm run check   # todo lo que corre la CI: lint, tipos, formato, tests, build y 
 | `npm run test:coverage`   | Tests unitarios con cobertura (mínimo 85 % de líneas)              |
 | `npm run test:e2e`        | Playwright contra el build: funcional, accesibilidad y visual      |
 | `npm run test:e2e:update` | Regenera las capturas de referencia tras un cambio visual aprobado |
+| `npm run og`              | Regenera las imágenes de vista previa al compartir (`public/og/`)  |
 
 ## Arquitectura
 
@@ -89,5 +90,7 @@ Cada push a `main` pasa por la CI (`.github/workflows/deploy.yml`) y solo se pub
 
 - `basePath: '/portfolio'` en `next.config.ts` debe coincidir con el nombre del repositorio.
 - Los archivos de `public/` se referencian con `asset()` (`src/config/site.ts`), porque `basePath` no se aplica solo a `url()` ni a `<img>`.
+
+Al compartir el enlace se muestra `public/og/{es,en}.png`; si cambias el titular, ejecuta `npm run og`. El build genera `sitemap.xml` con ambos idiomas; puedes enviarlo en Google Search Console.
 
 `source/` contiene el diseño original (Claude Design), solo como referencia; no forma parte del sitio.
