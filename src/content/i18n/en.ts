@@ -27,7 +27,7 @@ export const en: Dictionary = {
   },
   preloader: { loading: 'Portfolio · loading…' },
   hero: {
-    kicker: 'Software Engineering · 4th semester',
+    kicker: 'Software Engineering · {nth} semester',
     title: 'I build interfaces that feel ',
     titleEmphasis: 'right.',
     introBefore: 'Software Engineering student. I work with ',
@@ -136,7 +136,7 @@ export const en: Dictionary = {
     dockTap: 'Tap an icon to open it',
     dockCopy: 'click to copy',
     copied: 'Copied ✓',
-    footer: '© 2026 Sebastián González · Handmade with Next.js',
+    footer: '© {year} Sebastián González · Handmade with Next.js',
     localTime: 'local time',
     backToTop: 'Back to top ↑',
   },

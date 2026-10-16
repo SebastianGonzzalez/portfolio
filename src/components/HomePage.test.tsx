@@ -48,7 +48,7 @@ describe('HomePage', () => {
     expect(notPrevented).toBe(false);
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
     // Links to anything else are left alone.
-    fireEvent.click(screen.getByText(es.contact.footer));
+    fireEvent.click(screen.getByText(/Hecho a mano con Next.js/));
     expect(scrollTo).toHaveBeenCalledTimes(1);
   });
 

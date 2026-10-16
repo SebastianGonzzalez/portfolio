@@ -1,12 +1,14 @@
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
+import { version } from './package.json';
 
 export default defineConfig({
   plugins: [react()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   test: {
     environment: 'jsdom',
+    env: { NEXT_PUBLIC_APP_VERSION: version },
     // Plain class names in tests ("dotActive"), so assertions can target CSS Module classes.
     css: { modules: { classNameStrategy: 'non-scoped' } },
     include: ['src/**/*.test.{ts,tsx}'],

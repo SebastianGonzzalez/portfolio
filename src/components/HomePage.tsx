@@ -1,3 +1,4 @@
+import { PROFILE } from '@/config/site';
 import { LANGS, getDictionary, type Lang } from '@/content/i18n';
 import { Header } from '@/components/layout/Header';
 import { LanguageHint } from '@/components/layout/LanguageHint';
@@ -11,6 +12,7 @@ import { GitHubActivity } from '@/components/sections/GitHubActivity/GitHubActiv
 import { Hero } from '@/components/sections/Hero/Hero';
 import { Lab } from '@/components/sections/Lab/Lab';
 import { Work } from '@/components/sections/Work/Work';
+import { englishOrdinal, fill, semesterOf } from '@/lib/format';
 import { AppProviders } from '@/providers';
 import styles from './HomePage.module.css';
 
@@ -18,6 +20,11 @@ import styles from './HomePage.module.css';
 export function HomePage({ lang }: { lang: Lang }) {
   const t = getDictionary(lang);
   const labels = t.sections;
+  // Rendered at build time, so the static HTML stays current with every deploy.
+  const now = new Date();
+  const semester = semesterOf(PROFILE.studiesStart, now);
+  const hero = { ...t.hero, kicker: fill(t.hero.kicker, { n: semester, nth: englishOrdinal(semester) }) };
+  const contact = { ...t.contact, footer: fill(t.contact.footer, { year: now.getFullYear() }) };
   // The language suggestion is written in the language it suggests.
   const hintCopy = Object.fromEntries(
     LANGS.filter((l) => l !== lang).map((l) => [l, getDictionary(l).languageHint]),
@@ -32,13 +39,13 @@ export function HomePage({ lang }: { lang: Lang }) {
         <Header lang={lang} sections={labels} t={t.header} />
         <LanguageHint lang={lang} copy={hintCopy} />
         <StackedSections>
-          <Hero t={t.hero} />
+          <Hero t={hero} />
           <Approach t={t.approach} label={labels.approach} />
           <Work lang={lang} t={t.work} label={labels.work} />
           <GitHubActivity lang={lang} t={t.github} label={labels.github} />
           <Lab t={t.lab} label={labels.lab} />
           <Archive lang={lang} t={t.archive} label={labels.archive} />
-          <Contact t={t.contact} label={labels.contact} />
+          <Contact t={contact} label={labels.contact} />
         </StackedSections>
         <SectionIndicator sections={labels} />
       </div>

@@ -27,7 +27,8 @@ export const es = {
   },
   preloader: { loading: 'Portfolio · cargando…' },
   hero: {
-    kicker: 'Ingeniería de Software · 4.º semestre',
+    /** {n}: current semester, computed at build time. */
+    kicker: 'Ingeniería de Software · {n}.º semestre',
     title: 'Construyo interfaces que se sienten ',
     titleEmphasis: 'bien.',
     introBefore: 'Estudiante de Ingeniería de Software. Trabajo con ',
@@ -141,7 +142,8 @@ export const es = {
     dockTap: 'Toca un ícono para abrirlo',
     dockCopy: 'clic para copiar',
     copied: 'Copiado ✓',
-    footer: '© 2026 Sebastián González · Hecho a mano con Next.js',
+    /** {year}: build year. */
+    footer: '© {year} Sebastián González · Hecho a mano con Next.js',
     localTime: 'hora local',
     backToTop: 'Volver arriba ↑',
   },
