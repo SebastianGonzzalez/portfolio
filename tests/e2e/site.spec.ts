@@ -54,9 +54,14 @@ test.describe('page', () => {
     await expect(calendar).toBeFocused();
   });
 
-  test('unknown URLs get the 404 page', async ({ page }) => {
+  test('unknown URLs get a bilingual 404 page that leads back home', async ({ page }) => {
     const response = await page.goto('./does-not-exist/');
     expect(response?.status()).toBe(404);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Esta página no existe.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('This page doesn’t exist.');
+    await page.screenshot({ path: 'test-results/404.png' });
+    await page.getByRole('link', { name: '← Back to home' }).click();
+    await expect(page).toHaveURL(/\/portfolio\/en\/$/);
   });
 });
 
