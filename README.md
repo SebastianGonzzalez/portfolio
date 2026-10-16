@@ -93,8 +93,6 @@ Cada push a `main` pasa por la CI (`.github/workflows/deploy.yml`) y solo se pub
 
 Al compartir el enlace se muestra `public/og/{es,en}.png`; si cambias el titular, ejecuta `npm run og`. El build genera `sitemap.xml` con ambos idiomas; puedes enviarlo en Google Search Console.
 
-`source/` contiene el diseño original (Claude Design), solo como referencia; no forma parte del sitio.
-
 ## Licencia
 
 El código está bajo licencia MIT. Los textos, las imágenes y los datos personales están reservados: puedes usar el código para tu propio portafolio, pero con tu contenido. Detalles en [`LICENSE`](LICENSE).

@@ -22,6 +22,7 @@ blob-report
 
 # Herramientas locales, editor y sistema operativo
 .impeccable
+source
 .vercel
 .vscode
 .idea
