@@ -82,7 +82,14 @@ function SkillsFace({ groups }: { groups: string[] }) {
     <div className={cx(styles.face, styles.skillsFace)}>
       <Corners at={['tr', 'bl']} />
       {SKILL_GROUPS.map((skills, gi) => (
-        <div key={groups[gi]} className={cx(styles.skillGroup, gi === 0 && styles.skillGroupMain)}>
+        <div
+          key={groups[gi]}
+          className={cx(
+            styles.skillGroup,
+            gi === 0 && styles.skillGroupMain,
+            gi > 1 && styles.skillGroupDivided,
+          )}
+        >
           <span className={cx(text.label, styles.skillLabel)}>{groups[gi]}</span>
           <div className={styles.skillRow} translate="no">
             {skills.map((s) => (

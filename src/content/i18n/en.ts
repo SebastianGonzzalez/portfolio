@@ -35,7 +35,7 @@ export const en: Dictionary = {
     introAfter: ' to turn ideas into products where every detail has a reason.',
     stackKicker: 'How I build and what I use',
     stackHint: 'hover to explode',
-    skillGroups: ['Front-end (main)', 'Other languages', 'Tools'],
+    skillGroups: ['Front-end (main)', 'Back-end', 'Other languages', 'Tools'],
     layers: [
       { title: 'You', description: 'Whoever uses the interface: what they see, touch and feel.' },
       { title: 'Interaction', description: 'Motion, states and feedback with intent.' },
