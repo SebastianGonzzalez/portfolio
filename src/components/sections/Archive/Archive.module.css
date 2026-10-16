@@ -1,0 +1,25 @@
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-meta);
+}
+
+.all {
+  color: var(--color-ink);
+  border-bottom: 1px dashed var(--color-ink);
+  padding-bottom: 4px;
+  transition: opacity 200ms ease-out;
+}
+
+.all:hover {
+  opacity: 0.6;
+}
+
+.list {
+  border-bottom: 1px dashed var(--color-rule);
+}

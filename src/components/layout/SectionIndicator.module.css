@@ -1,0 +1,55 @@
+.indicator {
+  position: fixed;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(12px, 2vw, 24px);
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-meta);
+}
+
+.current {
+  color: var(--color-ink);
+}
+
+.bars {
+  display: flex;
+  gap: 3px;
+}
+
+.bar {
+  width: 14px;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--color-rule-soft);
+  transition: background 300ms ease-out;
+}
+
+.barDone {
+  background: var(--color-ink);
+}
+
+.labelWindow {
+  display: block;
+  height: 14px;
+  overflow: hidden;
+  line-height: 14px;
+  min-width: 84px;
+}
+
+.label {
+  display: block;
+}

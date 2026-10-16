@@ -1,0 +1,107 @@
+/*
+ * Cascade layers: reset < ui (shared text styles) < component modules (unlayered).
+ * A component's own CSS Module always wins, whatever order the bundler emits the files in.
+ */
+@layer reset, ui;
+
+:root {
+  /* Ink and paper */
+  --color-ink: #1c1a17;
+  --color-ink-raised: #3a3733;
+  --color-paper: #ffffff;
+  --color-paper-warm: #fafaf9;
+  --color-surface: #f4f4f2;
+  --color-surface-chip: #f2f2f0;
+
+  /* Text */
+  --color-text: #3e3b36;
+  --color-text-muted: #4a4741;
+  --color-meta: #5c5952;
+  --color-meta-soft: #6e6b64;
+  --color-on-dark-meta: #a29f97;
+  --color-on-dark-body: #b9b6ae;
+  --color-watermark: #d0cec6;
+
+  /* Dashed rules, strongest to faintest */
+  --color-rule-strong: #8e8b83;
+  --color-chip-border: #9c998f;
+  --color-rule: #a6a39b;
+  --color-rule-soft: #b4b1a9;
+  --color-rule-faint: #b9b6ae;
+
+  /* Frosted pills (header, section indicator) */
+  --glass-border: 1px solid rgba(28, 26, 23, 0.08);
+  --glass-shadow: 0 1px 2px rgba(28, 26, 23, 0.06), 0 8px 24px rgba(28, 26, 23, 0.06);
+  --glass-blur: blur(14px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --page-gutter: clamp(20px, 4vw, 56px);
+}
+
+@layer reset {
+  html {
+    scroll-behavior: smooth;
+    /* Keyboard focus never lands under the fixed header or the section indicator. */
+    scroll-padding-top: 88px;
+    scroll-padding-bottom: 84px;
+    color-scheme: light;
+    -webkit-tap-highlight-color: rgba(28, 26, 23, 0.08);
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    color: inherit;
+  }
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper-warm);
+  }
+  :focus-visible {
+    outline: 1.5px dashed var(--color-ink);
+    outline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hints that only make sense with a cursor, or only on touch screens. */
+.touch-only {
+  display: none;
+}
+@media (hover: none) {
+  .hover-only {
+    display: none !important;
+  }
+  .touch-only {
+    display: inline;
+  }
+}

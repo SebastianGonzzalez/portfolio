@@ -1,0 +1,211 @@
+.board {
+  flex: 1;
+  position: relative;
+  margin: 0 16px;
+  min-height: 320px;
+  background-image: radial-gradient(#adaaa2 1px, transparent 1px);
+  background-size: 18px 18px;
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* Pieces are buttons (focusable, keyboard-movable) styled as plain blocks. Variants below override this. */
+.piece {
+  position: absolute;
+  cursor: grab;
+  box-sizing: content-box;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.piece:focus-visible {
+  outline-offset: 3px;
+}
+
+.send {
+  left: 7%;
+  top: 12%;
+  background: var(--color-ink);
+  color: var(--color-paper-warm);
+  padding: 15px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Motion switch */
+
+.switch {
+  left: 55%;
+  top: 9%;
+  background: var(--color-paper-warm);
+  border: 1px dashed var(--color-rule-strong);
+  padding: 12px 14px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font: inherit;
+  color: inherit;
+}
+
+.switchLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.track {
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--color-rule-soft);
+  position: relative;
+  transition: background 220ms var(--ease-out);
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-paper-warm);
+  transform: translateX(0);
+  transition: transform 220ms var(--ease-out);
+}
+
+.switch[aria-checked='true'] .track {
+  background: var(--color-ink);
+}
+
+.switch[aria-checked='true'] .thumb {
+  transform: translateX(20px);
+}
+
+/* Project card */
+
+.card {
+  left: 10%;
+  top: 44%;
+  width: 220px;
+  background: var(--color-paper-warm);
+  border: 1px dashed var(--color-rule-strong);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardImage {
+  display: flex;
+  height: 84px;
+  background: repeating-linear-gradient(135deg, #e6e6e4 0 1px, transparent 1px 8px);
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-meta);
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cardName {
+  font-family: var(--font-serif);
+  font-size: 20px;
+}
+
+.cardLang {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-meta);
+}
+
+.head {
+  left: 50%;
+  top: 42%;
+  background: var(--color-paper);
+  border: 1px solid var(--color-ink);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.note {
+  left: 60%;
+  top: 58%;
+  width: 176px;
+  background: var(--color-ink);
+  color: var(--color-paper-warm);
+  padding: 16px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+/* Keyboard hint: only while a piece has keyboard focus. */
+.keyboardHint {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-meta);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease-out;
+}
+
+.board:has(:focus-visible) .keyboardHint {
+  opacity: 1;
+}
+
+/* Phones: rearranged so the pieces don't overlap. */
+@media (max-width: 640px) {
+  .board {
+    min-height: 420px;
+  }
+  .send {
+    left: 5%;
+    top: 5%;
+  }
+  .switch {
+    left: auto;
+    right: 5%;
+    top: 22%;
+  }
+  .head {
+    left: auto;
+    right: 5%;
+    top: 44%;
+  }
+  .card {
+    left: 5%;
+    top: 40%;
+    width: 180px;
+  }
+  .note {
+    left: auto;
+    right: 4%;
+    top: auto;
+    bottom: 5%;
+    width: 150px;
+    font-size: 19px;
+  }
+}

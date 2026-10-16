@@ -1,0 +1,120 @@
+.github {
+  overflow: hidden;
+}
+
+/* Decorative oversized lettering behind the heading. */
+.watermark {
+  position: absolute;
+  right: -2%;
+  top: clamp(40px, 6vw, 80px);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(120px, 19vw, 280px);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--color-watermark);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.head {
+  position: relative;
+}
+
+.title {
+  max-width: 620px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px dashed var(--color-rule-strong);
+  border-radius: 999px;
+  background: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  transition: background 200ms ease-out;
+}
+
+.profile:hover {
+  background: var(--color-surface);
+}
+
+/* Gray while showing the bundled snapshot, green once live data arrived. */
+.status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-rule-strong);
+}
+
+.statusLive {
+  background: oklch(0.62 0.15 150);
+}
+
+.panel {
+  position: relative;
+  border: 1px dashed var(--color-rule);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+/* Stats row */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border-bottom: 1px dashed var(--color-rule);
+}
+
+.stat {
+  padding: 24px 26px;
+  border-right: 1px dashed var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statUnit {
+  font-size: 20px;
+  color: var(--color-meta);
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--color-rule);
+}
+
+@media (max-width: 640px) {
+  .watermark {
+    font-size: 96px;
+    top: 14px;
+    right: -6%;
+  }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat {
+    padding: 20px;
+  }
+  .stat:nth-child(2n) {
+    border-right: 0;
+  }
+  .stat:nth-child(-n + 2) {
+    border-bottom: 1px dashed var(--color-rule);
+  }
+}

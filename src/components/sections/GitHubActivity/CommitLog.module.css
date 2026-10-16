@@ -1,0 +1,100 @@
+.log {
+  flex: 2 1 460px;
+  min-width: 0;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.commit {
+  display: grid;
+  grid-template-columns: 18px 72px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px dashed var(--color-rule-soft);
+  font-size: 14px;
+  transition: background 200ms ease-out;
+}
+
+.commit:hover {
+  background: var(--color-surface);
+}
+
+.rail {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.node {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-top: 4px;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  box-sizing: border-box;
+}
+
+.hash {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-meta);
+}
+
+.message {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repo {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-meta);
+  white-space: nowrap;
+}
+
+.latest .node {
+  background: var(--color-ink);
+}
+
+.latest .repo {
+  background: var(--color-ink);
+  color: var(--color-paper-warm);
+}
+
+/* Phones: dot | message on two lines, repo top right. */
+@media (max-width: 640px) {
+  .commit {
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+    column-gap: 10px;
+    row-gap: 6px;
+  }
+  .rail {
+    grid-row: 1 / 3;
+  }
+  .message {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    white-space: normal;
+    line-height: 1.45;
+  }
+  .repo {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+}

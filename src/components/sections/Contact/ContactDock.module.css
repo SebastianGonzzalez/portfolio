@@ -1,0 +1,71 @@
+.dockArea {
+  flex: 1 1 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  height: 76px;
+  padding: 0 16px 12px;
+  box-sizing: border-box;
+  border: 1px dashed #4a4640;
+  border-radius: 22px;
+  background: #262320;
+}
+
+/* Width and height are animated by useDockMagnification. */
+.item {
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-paper-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  opacity: 0;
+  transition:
+    opacity 180ms ease-out,
+    transform 220ms var(--ease-out);
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: var(--color-paper-warm);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.tooltipVisible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.icon {
+  width: 44%;
+  height: 44%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-on-dark-body);
+  min-height: 18px;
+}

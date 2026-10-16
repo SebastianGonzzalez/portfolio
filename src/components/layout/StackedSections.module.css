@@ -1,0 +1,12 @@
+/* Focus target of the skip link; not interactive, so no ring. */
+.main:focus {
+  outline: none;
+}
+
+.main {
+  display: block;
+  max-width: 1240px;
+  margin: 0 auto;
+  border-left: 1px dashed var(--color-rule-soft);
+  border-right: 1px dashed var(--color-rule-soft);
+}
