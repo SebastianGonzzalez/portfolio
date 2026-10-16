@@ -1,0 +1,11 @@
+.next
+out
+coverage
+source
+test-results
+playwright-report
+package-lock.json
+tests/e2e/**/*-snapshots
+AGENTS.md
+.impeccable
+next-env.d.ts
