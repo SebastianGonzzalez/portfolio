@@ -20,7 +20,7 @@ export const galeriaVisual: Project = {
       imageAlt: 'Captura — Galería visual',
       case: {
         problem:
-          'Artistas y fotógrafos necesitan mostrar su obra de forma inmersiva, no en una cuadrícula genérica de imágenes.',
+          'Explorar una forma inmersiva de mostrar obra visual, en lugar de la cuadrícula de imágenes de siempre, y aprender TypeScript estricto en el proceso.',
         role: 'Proyecto personal: diseño de la interacción, desarrollo y despliegue.',
         built: [
           'Rueda 3D de obras que se recorre con el scroll',
@@ -40,7 +40,7 @@ export const galeriaVisual: Project = {
       imageAlt: 'Screenshot — Visual gallery',
       case: {
         problem:
-          'Artists and photographers need to show their work in an immersive way, not in a generic image grid.',
+          'Explore an immersive way to show visual work instead of the usual image grid, and learn strict TypeScript along the way.',
         role: 'Personal project: interaction design, development and deployment.',
         built: [
           '3D wheel of works you browse by scrolling',

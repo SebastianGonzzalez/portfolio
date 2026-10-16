@@ -101,7 +101,7 @@ export function ProjectCard({ project, number, lang, t, featured, onFeature }: P
               aria-label={`${t.viewCase}: ${project.name}`}
               onClick={onFeature}
             >
-              {t.viewCase} ↑
+              {t.viewCase} →
             </button>
           )}
         </div>

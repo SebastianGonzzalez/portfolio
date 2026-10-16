@@ -13,7 +13,11 @@ import {
 import { orderWithFeatured } from './order';
 import { Work } from './Work';
 
-const [casaNua, doose] = PROJECTS;
+const indexOf = (slug: string) => PROJECTS.findIndex((p) => p.slug === slug);
+const DOOSE = indexOf('doose');
+const GALLERY = indexOf('galeria-visual');
+const [first] = PROJECTS;
+const doose = PROJECTS[DOOSE];
 const caseText = (i: number) => PROJECTS[i].text.es.case.problem;
 const viewCase = (name: string) => screen.queryByRole('button', { name: `${es.work.viewCase}: ${name}` });
 
@@ -29,16 +33,16 @@ describe('Work', () => {
       PROJECTS.map((p) => p.name),
     );
     expect(screen.getByText(caseText(0))).toBeTruthy();
-    expect(viewCase(casaNua.name)).toBeNull();
+    expect(viewCase(first.name)).toBeNull();
     expect(screen.getAllByRole('link', { name: `${es.work.viewRepo} ↗` })[0].getAttribute('href')).toBe(
-      `https://github.com/${casaNua.repo}`,
+      `https://github.com/${first.repo}`,
     );
   });
 
   it('features another project when its case is requested', () => {
     renderWithProviders(<Work lang="es" t={es.work} label={es.sections.work} />);
     fireEvent.click(viewCase(doose.name)!);
-    expect(screen.getByText(caseText(1))).toBeTruthy();
+    expect(screen.getByText(caseText(DOOSE))).toBeTruthy();
     expect(screen.queryByText(caseText(0))).toBeNull();
     expect(screen.getAllByRole('heading', { level: 3 })[0].textContent).toBe(doose.name);
   });
@@ -54,8 +58,8 @@ describe('Work', () => {
   });
 
   it('orders projects with the featured one first', () => {
-    expect(orderWithFeatured(2)).toEqual([2, 0, 1]);
-    expect(orderWithFeatured(0)).toEqual([0, 1, 2]);
+    expect(orderWithFeatured(2)).toEqual([2, 0, 1, 3]);
+    expect(orderWithFeatured(0)).toEqual([0, 1, 2, 3]);
   });
 });
 
@@ -77,10 +81,10 @@ describe('Work with motion', () => {
     const { container } = renderWithProviders(<Work lang="es" t={es.work} label={es.sections.work} />);
     mockRect(container.querySelector('.grid')!, { top: 20 });
     fireEvent.click(viewCase(doose.name)!);
-    expect(screen.queryByText(caseText(1))).toBeNull(); // still fading out
+    expect(screen.queryByText(caseText(DOOSE))).toBeNull(); // still fading out
     act(() => animations.at(-1)!.onfinish!());
     advance(40);
-    expect(screen.getByText(caseText(1))).toBeTruthy();
+    expect(screen.getByText(caseText(DOOSE))).toBeTruthy();
     expect(scrollBy).toHaveBeenCalledWith({ top: -90, behavior: 'smooth' });
   });
 });
@@ -95,15 +99,15 @@ describe('Work and the URL', () => {
     renderWithProviders(<Work lang="es" t={es.work} label={es.sections.work} />);
     fireEvent.click(viewCase(doose.name)!);
     expect(window.location.search).toBe('?caso=doose');
-    fireEvent.click(viewCase(casaNua.name)!);
+    fireEvent.click(viewCase(first.name)!);
     expect(window.location.search).toBe('');
   });
 
   it('opens a shared link on its case', () => {
     window.history.replaceState(null, '', '/?caso=galeria-visual');
     renderWithProviders(<Work lang="es" t={es.work} label={es.sections.work} />);
-    expect(screen.getAllByRole('heading', { level: 3 })[0].textContent).toBe(PROJECTS[2].name);
-    expect(screen.getByText(caseText(2))).toBeTruthy();
+    expect(screen.getAllByRole('heading', { level: 3 })[0].textContent).toBe(PROJECTS[GALLERY].name);
+    expect(screen.getByText(caseText(GALLERY))).toBeTruthy();
   });
 
   it('follows back/forward navigation', () => {
@@ -112,7 +116,7 @@ describe('Work and the URL', () => {
       window.history.replaceState(null, '', '/?caso=doose');
       window.dispatchEvent(new PopStateEvent('popstate'));
     });
-    expect(screen.getByText(caseText(1))).toBeTruthy();
+    expect(screen.getByText(caseText(DOOSE))).toBeTruthy();
   });
 
   it('falls back to the first project for unknown cases', () => {

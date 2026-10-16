@@ -18,7 +18,7 @@ export const casaNua: Project = {
       imageAlt: 'Captura — Casa Nua',
       case: {
         problem:
-          'Una tienda necesitaba vender en línea y controlar su inventario sin depender de hojas de cálculo ni de un equipo técnico.',
+          'Construir una tienda en línea completa, con ventas, inventario y roles, solo en el navegador: sin back-end, sin frameworks y sin dependencias.',
         role: 'Desarrollo completo del front-end: arquitectura, lógica de negocio e interfaz. Proyecto individual para Desarrollo Web.',
         built: [
           'Login y registro con roles (admin / cliente) y cuentas que el admin activa',
@@ -39,7 +39,7 @@ export const casaNua: Project = {
       imageAlt: 'Screenshot — Casa Nua',
       case: {
         problem:
-          'A store needed to sell online and track its inventory without relying on spreadsheets or a technical team.',
+          'Build a complete online store, with sales, inventory and roles, entirely in the browser: no back end, no frameworks, no dependencies.',
         role: 'Full front-end development: architecture, business logic and interface. Solo project for Web Development.',
         built: [
           'Login and sign-up with roles (admin / customer) and admin-approved accounts',
