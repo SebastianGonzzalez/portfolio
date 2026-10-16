@@ -23,7 +23,7 @@ describe('toRows', () => {
     expect(galeria).toMatchObject({ number: '01', kind: 'Experimento', language: 'TypeScript' });
     expect(galeria.preview).toContain('url(/assets/galeria-visual.png)');
     expect(galeria.preview).toContain('opengraph.githubassets.com');
-    expect(doose).toMatchObject({ number: '03', kind: 'Sitio web' });
+    expect(doose).toMatchObject({ number: '03', kind: 'Aplicación full-stack' });
   });
 
   it('uses a generic kind and no preview for repositories the site does not describe', () => {

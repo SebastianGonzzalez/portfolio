@@ -33,7 +33,6 @@ export interface Project {
     src: string;
     /** Shown if `src` fails: GitHub's generated preview of the repository. */
     fallback: string;
-    credit?: { name: string; url: string };
   };
   text: Record<Lang, ProjectText>;
 }

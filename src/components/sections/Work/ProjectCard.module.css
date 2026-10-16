@@ -56,39 +56,6 @@
   background: var(--color-ink);
 }
 
-.credit {
-  position: absolute;
-  left: 6px;
-  bottom: 6px;
-  max-width: calc(100% - 12px);
-  padding: 3px 7px;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  font:
-    10px/1.2 system-ui,
-    -apple-system,
-    sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  backdrop-filter: blur(6px);
-}
-
-.credit a {
-  color: inherit;
-}
-
-.credit a:hover,
-.credit a:focus-visible {
-  text-decoration: underline;
-}
-
-/* The credit belongs to the photo: hide it once the fallback or placeholder shows. */
-.shot:has([data-fallback], [data-placeholder]) .credit {
-  display: none;
-}
-
 /* Text */
 
 .body {

@@ -36,7 +36,7 @@ export const es = {
     introAfter: ' para convertir ideas en productos donde cada detalle tiene una razón.',
     stackKicker: 'Cómo construyo y lo que uso',
     stackHint: 'pasa el cursor',
-    skillGroups: ['Front-end (principal)', 'Otros lenguajes', 'Herramientas'],
+    skillGroups: ['Front-end (principal)', 'Back-end', 'Otros lenguajes', 'Herramientas'],
     layers: [
       { title: 'Tú', description: 'Quien usa la interfaz: lo que ve, toca y siente.' },
       { title: 'Interacción', description: 'Motion, estados y feedback con intención.' },

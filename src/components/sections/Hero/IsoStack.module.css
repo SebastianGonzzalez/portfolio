@@ -75,12 +75,12 @@
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
-  gap: 12px 20px;
+  gap: 12px 14px;
   transform-style: preserve-3d;
 }
 
 .skillGroup {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -92,28 +92,58 @@
   flex: 1 1 100%;
 }
 
+/* Dashed rules tie each label to its own chips: one under the main row, one between the groups below it.
+   Drawn inside the gaps, so they take no room from the slab. */
+.skillGroupMain,
+.skillGroupDivided {
+  position: relative;
+}
+
+.skillGroupMain::after,
+.skillGroupDivided::before {
+  content: '';
+  position: absolute;
+  border: 0 dashed var(--color-rule);
+}
+
+.skillGroupMain::after {
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  border-bottom-width: 1px;
+}
+
+.skillGroupDivided::before {
+  top: 0;
+  bottom: 0;
+  left: -8px;
+  border-left-width: 1px;
+}
+
 .skillLabel {
   font-size: 9.5px;
+  /* Fixed, so every engine gives the slab the same height. */
+  line-height: 12px;
   white-space: nowrap;
 }
 
 .skillRow {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   transform-style: preserve-3d;
 }
 
 .skill {
   flex: 1 1 auto;
   height: 28px;
-  padding: 0 8px;
+  padding: 0 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px dashed var(--color-chip-border);
   background: rgba(250, 250, 249, 0.9);
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 10px;
   color: var(--color-ink);
   white-space: nowrap;
   transition:

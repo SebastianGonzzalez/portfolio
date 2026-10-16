@@ -1,57 +1,56 @@
+import { asset } from '@/config/site';
 import { repoPreview, type Project } from './types';
 
 export const doose: Project = {
   slug: 'doose',
   name: 'Doose',
   repo: 'DuanGomez/Doose',
-  language: 'SCSS',
+  language: 'TypeScript',
   year: '2026',
-  chips: ['SCSS', 'HTML', 'Equipo'],
-  site: 'https://github.com/DuanGomez/Doose',
-  image: {
-    src: 'https://images.unsplash.com/photo-1584915591129-2fa8cae28577?fm=jpg&q=70&w=1282&h=770&fit=crop&auto=format',
-    fallback: repoPreview('DuanGomez/Doose'),
-    credit: { name: 'Duman Photography', url: 'https://unsplash.com/photos/sp10n9ixbQU' },
-  },
+  chips: ['Angular', 'Spring Boot', 'PostgreSQL', 'JWT'],
+  site: 'https://duangomez.github.io/Doose/',
+  image: { src: asset('/assets/doose.png'), fallback: repoPreview('DuanGomez/Doose') },
   text: {
     es: {
-      kind: 'Sitio web',
-      description: 'Página para un estudio de tatuajes, construida en equipo con Duan Gómez.',
+      kind: 'Aplicación full-stack',
+      description:
+        'Plataforma para un estudio de tatuajes, hecha en equipo con Duan Gómez: Angular en el front-end y Spring Boot con PostgreSQL en el back-end.',
       imageAlt: 'Captura — Doose',
       case: {
         problem:
-          'Construir en equipo la web de un estudio de tatuajes, con estilos, trabajos y artistas, y con front-end y back-end en un mismo repositorio.',
-        role: 'Trabajo en equipo con Duan Gómez: maquetación del front-end y sistema de estilos en SCSS.',
+          'Construir en equipo una plataforma completa para un estudio de tatuajes: portafolio, catálogo de servicios, reservas de citas y un panel de administración, con front-end y back-end propios.',
+        role: 'Trabajo en equipo con Duan Gómez, en el front-end y en el back-end.',
         built: [
-          'Sitio con secciones de estilos, galería de trabajos y artistas',
-          'Sistema SCSS con variables, mixins y parciales reutilizables',
-          'Front-end conectado a un back-end con base de datos',
-          'Flujo de trabajo en equipo con Git sobre un repositorio compartido',
+          'API REST con Spring Boot, JPA y PostgreSQL, con tres roles: cliente, tatuador y administrador',
+          'Login con JWT y Spring Security; las rutas de administración están protegidas en la API y en Angular',
+          'Reservas que respetan la duración de cada servicio, las citas ya confirmadas y un máximo de 3 servicios por tatuador al día',
+          'Portafolio con favoritos, carrito que se conserva al recargar, agenda de citas y panel de administración',
         ],
         decisions:
-          'SCSS modular para mantener la consistencia visual entre páginas, y separación clara entre frontend y backend dentro del repositorio.',
+          'Back-end por capas (controladores, servicios, repositorios y DTOs) con manejo de errores centralizado y secretos en variables de entorno. Angular 17 con componentes standalone, signals, guards e interceptores.',
         result:
-          'Proyecto colaborativo completo. Corre en local porque depende de la base de datos, por eso no tiene demo pública.',
+          'Funciona completo en local con su base de datos, y tiene una demo pública en GitHub Pages donde la API se simula en el navegador con la misma lógica del back-end.',
       },
     },
     en: {
-      kind: 'Website',
-      description: 'Site for a tattoo studio, built together with Duan Gómez.',
+      kind: 'Full-stack app',
+      description:
+        'Platform for a tattoo studio, built with Duan Gómez: Angular on the front end, Spring Boot and PostgreSQL on the back end.',
       imageAlt: 'Screenshot — Doose',
       case: {
         problem:
-          'Build, as a team, the website of a tattoo studio, with its styles, work and artists, and with front end and back end in one repository.',
-        role: 'Team project with Duan Gómez: front-end layout and the SCSS styling system.',
+          'Build, as a team, a complete platform for a tattoo studio: portfolio, service catalog, appointment booking and an admin panel, with our own front end and back end.',
+        role: 'Team project with Duan Gómez, on both the front end and the back end.',
         built: [
-          'Site with sections for styles, portfolio and artists',
-          'SCSS system with variables, mixins and reusable partials',
-          'Front-end connected to a back-end with a database',
-          'Team workflow with Git on a shared repository',
+          'REST API with Spring Boot, JPA and PostgreSQL, with three roles: customer, tattoo artist and admin',
+          'JWT login with Spring Security; admin routes are protected both in the API and in Angular',
+          'Booking that respects each service’s duration, confirmed appointments and a limit of 3 services per artist a day',
+          'Portfolio with favorites, a cart that survives reloads, an appointment calendar and an admin panel',
         ],
         decisions:
-          'Modular SCSS to keep visuals consistent across pages, and a clear frontend / backend split in the repo.',
+          'Layered back end (controllers, services, repositories and DTOs) with centralized error handling and secrets in environment variables. Angular 17 with standalone components, signals, guards and interceptors.',
         result:
-          'Complete team project. It runs locally because it depends on the database, so there is no public demo.',
+          'Runs end to end locally with its database, and has a public demo on GitHub Pages where the API is simulated in the browser with the same logic as the back end.',
       },
     },
   },
