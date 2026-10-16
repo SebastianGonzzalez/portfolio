@@ -1,22 +1,41 @@
-# Compila el sitio estático y lo publica en GitHub Pages en cada push a main.
-name: Deploy to GitHub Pages
+# Verifica la calidad en cada push y PR; publica en GitHub Pages solo desde main y solo si todo pasa.
+name: CI / Deploy
 
 on:
+  # Every branch is checked; only main deploys (see the `if` on the deploy steps).
   push:
-    branches: [main]
+    branches: ['**']
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Superseded PR runs are cancelled; a deploy in progress on main is never interrupted.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  quality:
+    name: Lint, types, unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npx knip
+      - run: npm run test:coverage
+
   build:
+    name: Build and end-to-end tests
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,13 +45,29 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      # Visual baselines are rendered on the dev machine; CI runs the functional and accessibility checks.
+      - run: npm run test:e2e
+        env:
+          CI: true
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: test-results
       - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
         with:
           path: ./out
 
   deploy:
+    name: Deploy to GitHub Pages
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
