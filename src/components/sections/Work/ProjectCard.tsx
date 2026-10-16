@@ -25,7 +25,6 @@ export function ProjectCard({ project, number, lang, t, featured, onFeature }: P
   const ref = useRef<HTMLDivElement>(null);
   useEnterAnimation(ref, FADE_UP);
   const copy = project.text[lang];
-  const { credit } = project.image;
 
   return (
     <div ref={ref} data-reveal="" className={cx(styles.card, featured && styles.featured)}>
@@ -50,19 +49,6 @@ export function ProjectCard({ project, number, lang, t, featured, onFeature }: P
             height={770}
           />
         </a>
-        {/* Outside the link: no nested <a>. Hidden by CSS once the photo has fallen back. */}
-        {credit && (
-          <span className={styles.credit}>
-            Photo by{' '}
-            <a href={`${credit.url}?${UNSPLASH_UTM}`} target="_blank" rel="noopener">
-              {credit.name}
-            </a>{' '}
-            on{' '}
-            <a href={`https://unsplash.com/?${UNSPLASH_UTM}`} target="_blank" rel="noopener">
-              Unsplash
-            </a>
-          </span>
-        )}
       </div>
       <div className={styles.body}>
         <div className={cx(text.label, styles.meta)}>
@@ -110,5 +96,3 @@ export function ProjectCard({ project, number, lang, t, featured, onFeature }: P
     </div>
   );
 }
-
-const UNSPLASH_UTM = 'utm_source=portfolio&utm_medium=referral';

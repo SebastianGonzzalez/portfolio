@@ -47,10 +47,8 @@ describe('Work', () => {
     expect(screen.getAllByRole('heading', { level: 3 })[0].textContent).toBe(doose.name);
   });
 
-  it('credits the photographer until the photo falls back', () => {
+  it('falls back to the GitHub preview if a screenshot fails to load', () => {
     renderWithProviders(<Work lang="es" t={es.work} label={es.sections.work} />);
-    const credit = screen.getByRole('link', { name: doose.image.credit!.name });
-    expect(credit.getAttribute('href')).toContain('utm_source=portfolio');
     const img = screen.getByAltText(doose.text.es.imageAlt);
     fireEvent.error(img);
     expect(img.getAttribute('src')).toBe(doose.image.fallback);

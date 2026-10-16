@@ -35,8 +35,5 @@ permission:
 - The images in public/ (screenshots, preview images, avatar)
 - The name, photo, contact details and personal information of the author
 
-Third-party images keep their own licenses; their authors are credited on the
-site next to each image.
-
 You are welcome to build your own portfolio from this code, as long as you
 replace the content with your own.

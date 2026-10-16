@@ -13,7 +13,6 @@ const THIRD_PARTY_ORIGINS = [
   'https://api.github.com',
   'https://avatars.githubusercontent.com',
   'https://github-contributions-api.jogruber.de',
-  'https://images.unsplash.com',
 ];
 
 /**
@@ -21,7 +20,7 @@ const THIRD_PARTY_ORIGINS = [
  * static HTML; switching language is a full page load.
  */
 export function RootDocument({ lang, children }: { lang: Lang; children: ReactNode }) {
-  // Origins hit on first load: GitHub API and avatar, contributions calendar, project photo.
+  // Origins hit on first load: GitHub API and avatar, contributions calendar.
   for (const origin of THIRD_PARTY_ORIGINS) preconnect(origin, { crossOrigin: 'anonymous' });
   return (
     <html lang={lang} className={`${serif.variable} ${sans.variable} ${mono.variable}`}>

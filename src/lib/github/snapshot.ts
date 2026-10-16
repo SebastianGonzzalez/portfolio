@@ -14,7 +14,7 @@ export const GITHUB_SNAPSHOT: GitHubActivity = {
       year: '2026',
     },
     { repo: 'SebastianGonzzalez/Casa_Nua', name: 'Casa Nua', language: 'JavaScript', year: '2026' },
-    { repo: 'DuanGomez/Doose', name: 'Doose', language: 'SCSS', year: '2026' },
+    { repo: 'DuanGomez/Doose', name: 'Doose', language: 'TypeScript', year: '2026' },
   ],
   days: {
     '2026-05-02': { count: 1, level: 1 },
