@@ -5,6 +5,7 @@ import {
   mockRect,
   prefersReducedMotion,
   renderWithProviders,
+  touchScreen,
 } from '@/test/utils';
 import { Corners } from './Corners';
 import { Divider } from './Divider';
@@ -52,9 +53,22 @@ describe('entrance animations', () => {
     Element.prototype.getBoundingClientRect = original;
     const block = screen.getByTestId('block');
     expect(block.style.opacity).toBe('0');
+    expect(block.style.filter).toBe('blur(8px)');
     io.enter(block);
     expect(block.style.opacity).toBe('1');
     expect(io.observed(block)).toBe(false);
+  });
+
+  it('skip the blur on touch screens', () => {
+    touchScreen();
+    captureIntersectionObservers();
+    const original = Element.prototype.getBoundingClientRect;
+    Element.prototype.getBoundingClientRect = () => ({ top: 5000 }) as DOMRect;
+    renderWithProviders(<Reveal data-testid="block">Hello</Reveal>);
+    Element.prototype.getBoundingClientRect = original;
+    const block = screen.getByTestId('block');
+    expect(block.style.opacity).toBe('0');
+    expect(block.style.filter).toBe('');
   });
 
   it('leave content that starts on screen alone', () => {
