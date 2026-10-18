@@ -8,3 +8,10 @@ export function afterNextPaint(fn: () => void) {
   });
   return () => cancelAnimationFrame(id);
 }
+
+/**
+ * Touch-first screen (phones, tablets). Their GPUs flicker when re-rasterising tall 3D-transformed or
+ * blurred layers mid-scroll, so heavy effects fall back to plain opacity and translate there.
+ */
+export const isTouchScreen = () =>
+  window.matchMedia?.('(hover: none) and (pointer: coarse)').matches ?? false;

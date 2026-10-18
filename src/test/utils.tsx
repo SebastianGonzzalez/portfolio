@@ -16,6 +16,15 @@ export const prefersReducedMotion = (reduce: boolean) =>
     removeEventListener() {},
   }));
 
+/** Emulate a phone: a touch-first screen, motion allowed. */
+export const touchScreen = () =>
+  vi.stubGlobal('matchMedia', (media: string) => ({
+    matches: media.includes('pointer: coarse'),
+    media,
+    addEventListener() {},
+    removeEventListener() {},
+  }));
+
 /** GitHub unreachable: every request rejects. */
 export const offline = () =>
   vi.stubGlobal(

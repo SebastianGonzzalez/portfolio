@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, type RefObject } from 'react';
+import { isTouchScreen } from '@/lib/motion';
 import { useMotion } from '@/providers/MotionProvider';
 import { useScrollStackChannels } from '@/providers/ScrollStackProvider';
 
@@ -9,6 +10,7 @@ const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
  * Stacked scroll: every `[data-stack]` child of the container sticks once fully scrolled, and tilts back
  * and dims (its `[data-dim]` layer) while the next section slides over it. Also publishes which section
  * is in view, and fixes in-page anchors, which sticky stacking would otherwise send to the wrong place.
+ * On touch screens the tilt is skipped and only the dim plays (see `isTouchScreen`).
  */
 export function useStackedSections(containerRef: RefObject<HTMLElement | null>) {
   const { isActive } = useMotion();
@@ -21,9 +23,11 @@ export function useStackedSections(containerRef: RefObject<HTMLElement | null>) 
     let dims: (HTMLElement | null)[] = [];
     let progress: (number | undefined)[] = [];
     let raf = 0;
+    const tilt = !isTouchScreen();
 
     const layout = () => {
-      const vh = window.innerHeight;
+      // Smallest viewport (mobile toolbars shown), so hiding a toolbar mid-scroll never hides a section's end.
+      const vh = Math.min(window.innerHeight, document.documentElement.clientHeight || window.innerHeight);
       sections = [...container.querySelectorAll<HTMLElement>(':scope > [data-stack]')];
       dims = sections.map((s) => s.querySelector<HTMLElement>(':scope > [data-dim]'));
       // Read every height before writing any style, so the browser lays out once instead of once per section.
@@ -38,7 +42,7 @@ export function useStackedSections(containerRef: RefObject<HTMLElement | null>) 
 
     const cover = (i: number, p: number) => {
       const s = sections[i];
-      if (isActive()) {
+      if (tilt && isActive()) {
         s.style.transform =
           p > 0
             ? `perspective(1800px) rotateX(${(p * 6).toFixed(2)}deg) scale(${(1 - p * 0.07).toFixed(4)})`

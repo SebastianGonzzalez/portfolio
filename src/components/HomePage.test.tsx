@@ -2,7 +2,14 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { es } from '@/content/i18n/es';
 import { en } from '@/content/i18n/en';
-import { advance, mockRect, offline, prefersReducedMotion, useAnimationTimers } from '@/test/utils';
+import {
+  advance,
+  mockRect,
+  offline,
+  prefersReducedMotion,
+  touchScreen,
+  useAnimationTimers,
+} from '@/test/utils';
 import { HomePage } from './HomePage';
 
 describe('HomePage', () => {
@@ -111,5 +118,17 @@ describe('HomePage stacked scroll', () => {
         .getByRole('link', { name: new RegExp(es.sections.approach) })
         .querySelector('.dotActive'),
     ).toBeTruthy();
+  });
+
+  it('only dims on touch screens, where tilting a tall section flickers', () => {
+    touchScreen();
+    const { container } = render(<HomePage lang="es" />);
+    const sections = [...container.querySelectorAll<HTMLElement>('section[data-stack]')];
+    sections.forEach((s, i) => mockRect(s, { top: [0, 384][i] ?? 2000 }));
+    fireEvent.scroll(window);
+    advance(20);
+    expect(sections[0].style.position).toBe('sticky');
+    expect(sections[0].style.transform).toBe('');
+    expect(sections[0].querySelector<HTMLElement>(':scope > [data-dim]')!.style.opacity).toBe('0.15');
   });
 });
